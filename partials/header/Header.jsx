@@ -22,7 +22,7 @@ const Header = () => {
               alt="movieVerse"
               width={50}
               height={50} />
-            <span className="text-3xl">MovieVerse</span>
+            <span className="text-3xl">SK MOVIES</span>
           </Link>
 
           {/* links */}
