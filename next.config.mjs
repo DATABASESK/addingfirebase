@@ -27,11 +27,11 @@ const nextConfig = {
         headers: [
           {
             key: 'Content-Security-Policy',
-            value: "frame-ancestors 'self' https://your-embedding-domain.com;",
+            value: "frame-ancestors 'self' https://skmovies-cc.onrender.com;",
           },
           {
             key: 'X-Frame-Options',
-            value: 'ALLOW-FROM https://skmovies-cc.onrender.com/',
+            value: 'ALLOW-FROM https://skmovies-cc.onrender.com',
           }
         ],
       },
