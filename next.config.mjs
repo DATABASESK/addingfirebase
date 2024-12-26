@@ -19,6 +19,24 @@ const nextConfig = {
     RABBIT_API_KEY: process.env.RABBIT_API_KEY
   },
 
+  // Add custom headers for CSP and X-Frame-Options
+  async headers() {
+    return [
+      {
+        source: '/(.*)', // Apply to all routes
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: "frame-ancestors 'self' https://your-embedding-domain.com;",
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'ALLOW-FROM https://skmovies-cc.onrender.com/',
+          }
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
