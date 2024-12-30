@@ -8,19 +8,19 @@ const Server = () => {
   const defaultVideoServers = ["upcloud", "megacloud"];
 
   const MovieVideoPlayers = {
-    "vidsrc.dev": `https://vidsrc.dev/embed/movie/${MovieId}`,
-    "vidsrc.cc": `https://vidsrc.cc/v2/embed/movie/${MovieId}`,
-    vidsrc: `https://vidsrc.in/embed/movie/${MovieId}`,
-    vidsrcpro: `https://vidsrc.pro/embed/movie/${MovieId}`,
-    autoembed: `https://player.autoembed.cc/embed/movie/${MovieId}`,
+    
+    "SK.SERVER1": `https://vidsrc.cc/v2/embed/movie/${MovieId}`,
+    "Sk.SERVER2": `https://vidsrc.in/embed/movie/${MovieId}`,
+    "Sk.SERVER3": `https://vidsrc.pro/embed/movie/${MovieId}`,
+    "Sk.SERVER4": `https://player.autoembed.cc/embed/movie/${MovieId}`,
   };
 
   const TVVideoPlayers = {
-    "vidsrc.dev": `https://vidsrc.dev/embed/tv/${MovieId}/${season}/${episode}`,
-    "vidsrc.cc": `https://vidsrc.cc/v2/embed/tv/${MovieId}/${season}/${episode}`,
-    vidsrc: `https://vidsrc.in/embed/tv/${MovieId}/${season}/${episode}`,
-    vidsrcpro: `https://vidsrc.pro/embed/tv/${MovieId}/${season}/${episode}`,
-    autoembed: `https://player.autoembed.cc/embed/tv/${MovieId}/${season}/${episode}`,
+    
+    "Sk.SERVER1": `https://vidsrc.cc/v2/embed/tv/${MovieId}/${season}/${episode}`,
+    "Sk.SERVER2": `https://vidsrc.in/embed/tv/${MovieId}/${season}/${episode}`,
+    "Sk.SERVER3": `https://vidsrc.pro/embed/tv/${MovieId}/${season}/${episode}`,
+    "Sk.SERVER4": `https://player.autoembed.cc/embed/tv/${MovieId}/${season}/${episode}`,
   };
 
   const MovievideoPlayerEntry = Object.entries(MovieVideoPlayers);
