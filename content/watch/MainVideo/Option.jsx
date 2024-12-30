@@ -11,37 +11,42 @@ const Option = () => {
   const { setEpisode, MovieInfo } = useWatchContext();
 
   useEffect(() => {
+    // Autoplay functionality: starts the video and plays it
     if (watchSetting.autoPlay) {
-      const videoElement = document.querySelector("video");
+      const videoElement = document.querySelector("video"); // Assuming there's a video element
       if (videoElement) {
         videoElement.play();
-        enterFullscreen(videoElement);
+        enterFullscreen(videoElement); // Make sure video goes fullscreen
       }
     }
   }, [watchSetting.autoPlay]);
 
-  const enterFullscreen = (elem) => {
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-    } else if (elem.webkitRequestFullscreen) {
-      elem.webkitRequestFullscreen(); // Safari
-    } else if (elem.msRequestFullscreen) {
-      elem.msRequestFullscreen(); // IE11
+  // Function to make the video go fullscreen
+  const enterFullscreen = (videoElement) => {
+    if (videoElement.requestFullscreen) {
+      videoElement.requestFullscreen();
+    } else if (videoElement.webkitRequestFullscreen) { // Safari
+      videoElement.webkitRequestFullscreen();
+    } else if (videoElement.msRequestFullscreen) { // IE11
+      videoElement.msRequestFullscreen();
     }
   };
 
+  // Function to exit fullscreen mode
   const exitFullscreen = () => {
     if (document.exitFullscreen) {
       document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen(); // Safari
-    } else if (document.msExitFullscreen) {
-      document.msExitFullscreen(); // IE11
+    } else if (document.webkitExitFullscreen) { // Safari
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { // IE11
+      document.msExitFullscreen();
     }
   };
 
+  // Toggle movie fullscreen
   const toggleMovieFullscreen = () => {
-    const videoElement = document.querySelector("video"); // Assuming the video element is on the page
+    const videoElement = document.querySelector("video"); // Select the video element
+    
     if (!videoElement) {
       console.error("Video element not found!");
       return;
@@ -55,7 +60,7 @@ const Option = () => {
 
     setWatchSetting((prev) => ({
       ...prev,
-      movieFullscreen: !prev.movieFullscreen,
+      movieFullscreen: !prev.movieFullscreen, // Toggle the fullscreen state
     }));
   };
 
