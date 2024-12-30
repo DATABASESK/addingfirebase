@@ -31,7 +31,7 @@ const Option = () => {
         <div
           className="flex items-center gap-2 cursor-pointer"
           onClick={() => setWatchSetting(prev => ({ ...prev, autoPlay: !prev.autoPlay }))}
-        >Auto Play <span className="text-[#e26bbd]">{watchSetting.autoPlay ? "On" : "Off"}</span></div>
+        >Auto Play <span className="text-[#e26bbd]">{watchSetting.autoPlay ? "Off" : "On"}</span></div>
 
         <div
           className="flex items-center gap-2 cursor-pointer"
