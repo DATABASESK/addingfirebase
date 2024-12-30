@@ -131,7 +131,7 @@ const Option = () => {
         >
           Movie Fullscreen
           <span className="text-[#e26bbd]">
-            {watchSetting.movieFullscreen ? "On" : "Off"}
+            {watchSetting.movieFullscreen ? "Off" : "On"}
           </span>
         </div>
       </div>
