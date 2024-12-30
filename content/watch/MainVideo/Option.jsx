@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { LuExpand } from "react-icons/lu";
 import { FaForward, FaLightbulb } from "react-icons/fa6";
 import { FaBackward } from "react-icons/fa";
@@ -9,16 +10,30 @@ const Option = () => {
   const { setWatchSetting, watchSetting } = useWatchSettingContext();
   const { setEpisode, MovieInfo } = useWatchContext();
 
+  useEffect(() => {
+    if (watchSetting.autoPlay) {
+      const videoElement = document.querySelector("video"); // Assuming there's a video element on the page
+      if (videoElement) {
+        videoElement.play();
+        enterFullscreen(videoElement);
+      }
+    }
+  }, [watchSetting.autoPlay]);
+
+  const enterFullscreen = (elem) => {
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) { /* Safari */
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE11 */
+      elem.msRequestFullscreen();
+    }
+  };
+
   const toggleFullscreen = () => {
     const elem = document.documentElement; // Use the whole document as the fullscreen element
     if (!watchSetting.fullscreen) {
-      if (elem.requestFullscreen) {
-        elem.requestFullscreen();
-      } else if (elem.webkitRequestFullscreen) { /* Safari */
-        elem.webkitRequestFullscreen();
-      } else if (elem.msRequestFullscreen) { /* IE11 */
-        elem.msRequestFullscreen();
-      }
+      enterFullscreen(elem);
     } else {
       if (document.exitFullscreen) {
         document.exitFullscreen();
@@ -73,7 +88,7 @@ const Option = () => {
           onClick={toggleFullscreen}
         >
           Fullscreen
-          <span className="text-[#e26bbd]">{watchSetting.fullscreen ? "Off" : "On"}</span>
+          <span className="text-[#e26bbd]">{watchSetting.fullscreen ? "On" : "Off"}</span>
         </div>
 
       </div>
