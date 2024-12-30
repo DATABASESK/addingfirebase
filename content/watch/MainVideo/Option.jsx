@@ -12,7 +12,7 @@ const Option = () => {
 
   useEffect(() => {
     if (watchSetting.autoPlay) {
-      const videoElement = document.querySelector("video"); // Assuming there's a video element on the page
+      const videoElement = document.querySelector("video");
       if (videoElement) {
         videoElement.play();
         enterFullscreen(videoElement);
@@ -24,9 +24,9 @@ const Option = () => {
     if (elem.requestFullscreen) {
       elem.requestFullscreen();
     } else if (elem.webkitRequestFullscreen) {
-      elem.webkitRequestFullscreen();
+      elem.webkitRequestFullscreen(); // Safari
     } else if (elem.msRequestFullscreen) {
-      elem.msRequestFullscreen();
+      elem.msRequestFullscreen(); // IE11
     }
   };
 
@@ -34,19 +34,25 @@ const Option = () => {
     if (document.exitFullscreen) {
       document.exitFullscreen();
     } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
+      document.webkitExitFullscreen(); // Safari
     } else if (document.msExitFullscreen) {
-      document.msExitFullscreen();
+      document.msExitFullscreen(); // IE11
     }
   };
 
   const toggleMovieFullscreen = () => {
-    const movieContainer = document.querySelector("#movie-container");
-    if (!watchSetting.movieFullscreen) {
-      enterFullscreen(movieContainer);
-    } else {
-      exitFullscreen();
+    const videoElement = document.querySelector("video"); // Assuming the video element is on the page
+    if (!videoElement) {
+      console.error("Video element not found!");
+      return;
     }
+
+    if (!watchSetting.movieFullscreen) {
+      enterFullscreen(videoElement); // Enter fullscreen mode for the video
+    } else {
+      exitFullscreen(); // Exit fullscreen mode
+    }
+
     setWatchSetting((prev) => ({
       ...prev,
       movieFullscreen: !prev.movieFullscreen,
