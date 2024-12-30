@@ -23,36 +23,47 @@ const Option = () => {
   const enterFullscreen = (elem) => {
     if (elem.requestFullscreen) {
       elem.requestFullscreen();
-    } else if (elem.webkitRequestFullscreen) { /* Safari */
+    } else if (elem.webkitRequestFullscreen) {
       elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) { /* IE11 */
+    } else if (elem.msRequestFullscreen) {
       elem.msRequestFullscreen();
     }
   };
 
-  const toggleFullscreen = () => {
-    const elem = document.documentElement; // Use the whole document as the fullscreen element
-    if (!watchSetting.fullscreen) {
-      enterFullscreen(elem);
-    } else {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      } else if (document.webkitExitFullscreen) { /* Safari */
-        document.webkitExitFullscreen();
-      } else if (document.msExitFullscreen) { /* IE11 */
-        document.msExitFullscreen();
-      }
+  const exitFullscreen = () => {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
     }
-    setWatchSetting(prev => ({ ...prev, fullscreen: !prev.fullscreen }));
+  };
+
+  const toggleMovieFullscreen = () => {
+    const movieContainer = document.querySelector("#movie-container");
+    if (!watchSetting.movieFullscreen) {
+      enterFullscreen(movieContainer);
+    } else {
+      exitFullscreen();
+    }
+    setWatchSetting((prev) => ({
+      ...prev,
+      movieFullscreen: !prev.movieFullscreen,
+    }));
   };
 
   return (
     <div className="flex justify-between bg-[#22212c] px-2 py-2 text-slate-200 text-sm max-[880px]:flex-col max-[880px]:gap-5">
       <div className="flex gap-5 max-[880px]:flex-wrap">
-
         <div
           className="flex items-center gap-2 cursor-pointer"
-          onClick={() => setWatchSetting(prev => ({ ...prev, isExpanded: !prev.isExpanded }))}
+          onClick={() =>
+            setWatchSetting((prev) => ({
+              ...prev,
+              isExpanded: !prev.isExpanded,
+            }))
+          }
         >
           <span>{watchSetting.isExpanded ? <BiCollapse /> : <LuExpand />}</span>
           {watchSetting.isExpanded ? "Collapse" : "Expand"}
@@ -60,37 +71,58 @@ const Option = () => {
 
         <div
           className="flex items-center gap-2 cursor-pointer"
-          onClick={() => setWatchSetting(prev => ({ ...prev, light: !prev.light }))}
+          onClick={() =>
+            setWatchSetting((prev) => ({ ...prev, light: !prev.light }))
+          }
         >
-          <span><FaLightbulb /></span>
+          <span>
+            <FaLightbulb />
+          </span>
           Light
-          <span className="text-[#e26bbd]">{watchSetting.light ? "On" : "Off"}</span>
+          <span className="text-[#e26bbd]">
+            {watchSetting.light ? "On" : "Off"}
+          </span>
         </div>
 
         <div
           className="flex items-center gap-2 cursor-pointer"
-          onClick={() => setWatchSetting(prev => ({ ...prev, autoPlay: !prev.autoPlay }))}
+          onClick={() =>
+            setWatchSetting((prev) => ({
+              ...prev,
+              autoPlay: !prev.autoPlay,
+            }))
+          }
         >
           Auto Play
-          <span className="text-[#e26bbd]">{watchSetting.autoPlay ? "Off" : "On"}</span>
+          <span className="text-[#e26bbd]">
+            {watchSetting.autoPlay ? "Off" : "On"}
+          </span>
         </div>
 
         <div
           className="flex items-center gap-2 cursor-pointer"
-          onClick={() => setWatchSetting(prev => ({ ...prev, autoNext: !prev.autoNext }))}
+          onClick={() =>
+            setWatchSetting((prev) => ({
+              ...prev,
+              autoNext: !prev.autoNext,
+            }))
+          }
         >
           Auto Next
-          <span className="text-[#e26bbd]">{watchSetting.autoNext ? "On" : "Off"}</span>
+          <span className="text-[#e26bbd]">
+            {watchSetting.autoNext ? "On" : "Off"}
+          </span>
         </div>
 
         <div
           className="flex items-center gap-2 cursor-pointer"
-          onClick={toggleFullscreen}
+          onClick={toggleMovieFullscreen}
         >
-          Fullscreen
-          <span className="text-[#e26bbd]">{watchSetting.fullscreen ? "On" : "Off"}</span>
+          Movie Fullscreen
+          <span className="text-[#e26bbd]">
+            {watchSetting.movieFullscreen ? "On" : "Off"}
+          </span>
         </div>
-
       </div>
 
       <div className="flex gap-3">
@@ -98,22 +130,28 @@ const Option = () => {
           className="flex items-center gap-2 cursor-pointer"
           onClick={() => {
             if (MovieInfo?.type === "tv") {
-              setEpisode(prev => prev > 1 ? prev - 1 : prev);
+              setEpisode((prev) => (prev > 1 ? prev - 1 : prev));
             }
           }}
         >
-          <span><FaBackward /></span> Prev
+          <span>
+            <FaBackward />
+          </span>{" "}
+          Prev
         </div>
 
         <div
           className="flex items-center gap-2 cursor-pointer"
           onClick={() => {
             if (MovieInfo?.type === "tv") {
-              setEpisode(prev => prev + 1);
+              setEpisode((prev) => prev + 1);
             }
           }}
         >
-          Next <span><FaForward /></span>
+          Next{" "}
+          <span>
+            <FaForward />
+          </span>
         </div>
       </div>
     </div>
