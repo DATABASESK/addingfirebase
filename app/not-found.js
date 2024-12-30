@@ -24,7 +24,7 @@ export default function Custom404() {
 
           </div>
           <div className="relative mt-4">
-            <Image src={"/images/waifus/praise samuri.png"} width={400} height={600} alt="waifu" className="-scale-x-[1] max-[990px]:-scale-x-[0.8] max-[990px]:scale-y-[0.8] max-[700px]:hidden" />
+            <Image src={"/images/waifus/sexy sword.png"} width={500} height={700} alt="waifu" className="-scale-x-[1] max-[990px]:-scale-x-[0.8] max-[990px]:scale-y-[0.8] max-[700px]:hidden" />
             <div className="bg-[linear-gradient(0deg,#12111a,#12111a17,transparent)] w-full h-32 absolute bottom-0 left-0"></div>
           </div>
         </div>
