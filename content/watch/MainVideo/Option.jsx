@@ -73,7 +73,7 @@ const Option = () => {
           onClick={toggleFullscreen}
         >
           Fullscreen
-          <span className="text-[#e26bbd]">{watchSetting.fullscreen ? "On" : "Off"}</span>
+          <span className="text-[#e26bbd]">{watchSetting.fullscreen ? "Off" : "On"}</span>
         </div>
 
       </div>
