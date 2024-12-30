@@ -27,7 +27,7 @@ const nextConfig = {
         headers: [
           {
             key: 'Content-Security-Policy',
-            value: "frame-ancestors 'self' https://skmovies-cc.onrender.com;",
+            value: "frame-ancestors 'self' https://skyt-movies-app.onrender.com;",
           },
           {
             key: 'X-Frame-Options',
