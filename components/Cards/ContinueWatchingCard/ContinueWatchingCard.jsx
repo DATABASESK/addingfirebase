@@ -1,6 +1,4 @@
 "use client"
-import HLSPlayer from "@/components/HSLplayer";
-import clsx from "clsx";
 import Image from "next/image"
 import Link from "next/link";
 import { FaPlay } from "react-icons/fa6";
@@ -10,6 +8,7 @@ const ContinueWatchingCard = ({ data, hidden }) => {
   if (hidden) {
     return <div className=""></div>
   }
+
 
   return (
     <Link
@@ -42,7 +41,7 @@ const ContinueWatchingCard = ({ data, hidden }) => {
           <div className="w-full bg-[#404141] h-1 rounded-md">
             <div
               className="h-full bg-[#dd8dae] rounded-md"
-              style={{ width: `${(data?.currentTime * 100 / data?.duration) || 0}%` }}
+              style={{ width: `${(data?.episode * 100 / data?.totalepisode) || 0}%` }}
             ></div>
           </div>
 
