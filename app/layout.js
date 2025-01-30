@@ -1,4 +1,4 @@
-"use client";  // <-- Add this line to mark this as a Client Component
+"use client";  // <-- Keep this line for client-side components
 
 import { useState } from "react";
 import { Inter } from "next/font/google";
@@ -7,7 +7,7 @@ import Header from "@/partials/header/Header";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LoginModal from "@/components/LoginModal";  // Import Login Modal
-import { Analytics } from '@vercel/analytics/react'; // Import Analytics
+import AnalyticsWrapper from "@/components/AnalyticsWrapper";  // Import new wrapper
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,8 +33,8 @@ export default function RootLayout({ children }) {
 
         <ToastContainer draggable theme="dark" />
         
-        {/* Add Analytics component */}
-        <Analytics />
+        {/* Add the AnalyticsWrapper component */}
+        <AnalyticsWrapper />
       </body>
     </html>
   );
