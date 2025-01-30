@@ -1,4 +1,4 @@
-/*"use client"
+"use client"
 import { DiscussionEmbed } from 'disqus-react';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -48,4 +48,4 @@ const Comments = ({ MovieId, title }) => {
   );
 }
 
-export default Comments;*/
+export default Comments;
