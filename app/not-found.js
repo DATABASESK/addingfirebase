@@ -1,5 +1,6 @@
 import Image from 'next/image'; // Import Next.js Image component
 import Head from 'next/head'; // If you want to include custom font via `@font-face`
+import { nightTokyo } from "@/utils/fonts"; // Import the nightTokyo font
 
 export default function Custom404() {
   return (
@@ -33,9 +34,9 @@ export default function Custom404() {
           />
         </div>
 
-        {/* Added Kishore's name with custom font */}
+        {/* Added Kishore's name with custom font and correct size */}
         <div className="mt-4">
-          <p className="text-2xl font-[NightinTokyo] text-white">Kishore</p>
+          <p className={`${nightTokyo.className} text-3xl text-white`}>Kishore</p>
         </div>
       </div>
     </>
