@@ -17,12 +17,13 @@ export default function Custom404() {
 
       <div className="w-full h-screen bg-[#001f3d] flex flex-col items-center justify-center text-center px-4">
         <div className="text-lg text-white mb-4">
-          <p>This website is a movie platform created as part of a college project.</p>
-          <p>It is built solely for educational purposes and is not intended for commercial use or sale.</p>
-          <p>     </p>
+          
           <p>Disclaimer!</p>
-          <p>SK MOVIES does not host any files, it merely pulls streams from 3rd party services. Legal issues should be taken up with the file hosts and providers. SK MOVIES is not responsible for any media files shown by the video providers.</p>
-  
+          <p>SK MOVIES does not host any files, it merely pulls streams from 3rd party services. Legal issues should be taken up with the file hosts and providers.</p>   
+           <p>SK MOVIES is not responsible for any media files shown by the video providers.</p>
+           <p>This website is a movie platform created as part of a college project.</p>
+          <p>It is built solely for educational purposes and is not intended for commercial use or sale.</p>
+         
         </div>
 
         {/* Added "Created by" and image */}
