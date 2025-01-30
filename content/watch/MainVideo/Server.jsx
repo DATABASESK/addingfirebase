@@ -6,93 +6,26 @@ const Server = () => {
     useWatchContext();
 
   const MovieVideoPlayers = {
-    "SK.SERVER1": `https://vidsrc.cc/v2/embed/movie/${MovieId}`,
-    "SK.SERVER2": `https://vidsrc.in/embed/movie/${MovieId}`,
-    "SK.SERVER3": `https://vidsrc.pro/embed/movie/${MovieId}`,
-    "SK.SERVER4": `https://player.autoembed.cc/embed/movie/${MovieId}`,
+    "vidsrc.dev": `https://vidsrc.dev/embed/movie/${MovieId}`,
+    "vidsrc.cc": `https://vidsrc.cc/v2/embed/movie/${MovieId}`,
+    vidsrc: `https://vidsrc.in/embed/movie/${MovieId}`,
+    vidsrcpro: `https://vidsrc.pro/embed/movie/${MovieId}`,
+    autoembed: `https://player.autoembed.cc/embed/movie/${MovieId}`,
   };
 
   const TVVideoPlayers = {
-    "SK.SERVER1": `https://vidsrc.cc/v2/embed/tv/${MovieId}/${season}/${episode}`,
-    "SK.SERVER2": `https://vidsrc.in/embed/tv/${MovieId}/${season}/${episode}`,
-    "SK.SERVER3": `https://vidsrc.pro/embed/tv/${MovieId}/${season}/${episode}`,
-    "SK.SERVER4": `https://player.autoembed.cc/embed/tv/${MovieId}/${season}/${episode}`,
+    "vidsrc.dev": `https://vidsrc.dev/embed/tv/${MovieId}/${season}/${episode}`,
+    "vidsrc.cc": `https://vidsrc.cc/v2/embed/tv/${MovieId}/${season}/${episode}`,
+    vidsrc: `https://vidsrc.in/embed/tv/${MovieId}/${season}/${episode}`,
+    vidsrcpro: `https://vidsrc.pro/embed/tv/${MovieId}/${season}/${episode}`,
+    autoembed: `https://player.autoembed.cc/embed/tv/${MovieId}/${season}/${episode}`,
   };
 
   const MovievideoPlayerEntry = Object.entries(MovieVideoPlayers);
   const TVVideoPlayerEntry = Object.entries(TVVideoPlayers);
 
-  const fetchServerUrl = async (server) => {
-    const BASE_URL = "https://api.vidjoy.pro/rabbit/fetch/";
-    const PROXY_URL = "https://slave.docadan488.workers.dev/proxy?url=";
 
-    const headers = {
-      "x-api-key": process.env.RABBIT_API_KEY,
-    };
 
-    let url = BASE_URL + MovieId;
-
-    if (MovieInfo?.type === "tv") {
-      url += `&ss=${season}&ep=${episode}`;
-    }
-
-    try {
-      const fetchURL = PROXY_URL + btoa(url) + `&headers=${btoa(JSON.stringify(headers))}`;
-
-      const response = await fetch(fetchURL, { next: { revalidate: 43200 } });
-
-      if (!response.ok) {
-        return null;
-      }
-
-      const jsondata = await response.json();
-
-      return {
-        url: jsondata?.url[0]?.link,
-        referer: jsondata?.headers?.Referer,
-        subtitle: jsondata?.tracks,
-        item: server,
-      };
-    } catch (error) {
-      console.error("Error in fetchServerUrl:", error);
-      return null;
-    }
-  };
-
-  const setdefault = async () => {
-    try {
-      const data = await fetchServerUrl("SK.SERVER1");
-      if (data) {
-        setWatchInfo({
-          server: data.url,
-          item: data.item,
-          referer: data.referer,
-          subtitle: data.subtitle,
-          iframe: false,
-          loading: false,
-        });
-        return;
-      } else {
-        setWatchInfo({ loading: false });
-      }
-    } catch (error) {
-      console.error("Error fetching server URL:", error);
-      setWatchInfo({ loading: false });
-    }
-
-    // Fallback if no server URL found
-    if (!watchInfo?.url) {
-      setWatchInfo({
-        url: MovieInfo?.type === "tv" ? TVVideoPlayerEntry[0][1] : MovievideoPlayerEntry[0][1],
-        iframe: true,
-        loading: false,
-      });
-    }
-  };
-
-  useEffect(() => {
-    setdefault();
-  }, [episode, season, MovieInfo]);
 
   const changeServer = async (item, isIframe = true) => {
     setWatchInfo({ loading: true });
@@ -109,29 +42,24 @@ const Server = () => {
       return;
     }
 
-    try {
-      const data = await fetchServerUrl(item);
-
-      if (data) {
-        setWatchInfo({
-          server: data.url,
-          item: item,
-          referer: data.referer,
-          subtitle: data.subtitle,
-          iframe: false,
-          loading: false,
-        });
-      } else {
-        setWatchInfo({ loading: false });
-      }
-    } catch (error) {
-      console.error("Error fetching server URL:", error);
-      setWatchInfo({ loading: false });
-    }
   };
 
+  useEffect(() => {
+    const setDefault = () => {
+      setWatchInfo({ loading: true });
+
+      setWatchInfo({
+        url: MovieInfo?.type === "tv" ? TVVideoPlayerEntry[0][1] : MovievideoPlayerEntry[0][1],
+        iframe: true,
+        loading: false,
+      });
+    }
+
+    setDefault()
+  }, [])
+
   return (
-    <div className="w-full h-full flex flex-col gap-1">
+    <div className="w-full flex flex-col gap-1">
       <div className="bg-[#323044] w-full h-full px-4 flex items-center gap-8 max-[880px]:py-2">
         <div className="flex items-center">
           <span>
@@ -169,6 +97,8 @@ const Server = () => {
           ))}
         </div>
       </div>
+
+      <div className="bg-[#323044] w-full h-full px-4 flex items-center gap-8 max-[880px]:py-2"></div>
     </div>
   );
 };
