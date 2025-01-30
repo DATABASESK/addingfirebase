@@ -1,6 +1,6 @@
 "use client"
 import ContinueWatchingCard from "@/components/Cards/ContinueWatchingCard/ContinueWatchingCard"
-import { getWatchProgress } from "@/utils/GetProgress"
+import { getWatchProgress } from "@/utils/ProgressHandler"
 import { Fragment, useEffect, useState } from "react"
 
 
