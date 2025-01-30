@@ -11,7 +11,7 @@ const Links = ({ isMobile }) => {
   const links = [
     "Home",
     "Catalog",
-    "login"
+    "About"
 
     
    
