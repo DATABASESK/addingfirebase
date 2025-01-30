@@ -9,7 +9,7 @@ export default function Custom404() {
         <style>{`
           @font-face {
             font-family: 'NightinTokyo';
-            src: url('/assets/font/NightinTokyo-Bold.ttf') format('truetype');
+            src: url('/assets/font/NightinTokyo.ttf') format('truetype');
           }
         `}</style>
       </Head>
