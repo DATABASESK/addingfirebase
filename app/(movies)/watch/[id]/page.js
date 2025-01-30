@@ -6,7 +6,7 @@ import MovieInfos from "@/content/watch/MovieInfo/MovieInfo"
 import { WatchAreaContextProvider } from "@/context/Watch"
 import { WatchSettingContextProvider } from "@/context/WatchSetting"
 import { Fragment } from "react"
-import Comments from "@/content/watch/Comment/Comment"
+
 import Recommendation from "@/content/watch/Recommendation/Recommendation"
 import { getInfoTMDB } from "@/lib/MoviesFunctions"
 import MovieNotFound from "@/components/errors/MovieNotFound"
