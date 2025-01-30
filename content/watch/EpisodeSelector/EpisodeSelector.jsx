@@ -1,4 +1,4 @@
-/*"use client";
+"use client";
 
 import { useEffect, useState, useMemo, useCallback } from "react";
 import { HiOutlineBars3 } from "react-icons/hi2";
@@ -127,4 +127,4 @@ const EpisodeSelector = () => {
   );
 };
 
-export default EpisodeSelector;*/
+export default EpisodeSelector;
