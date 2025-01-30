@@ -7,6 +7,7 @@ import Header from "@/partials/header/Header";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LoginModal from "@/components/LoginModal";  // Import Login Modal
+import { Analytics } from '@vercel/analytics/react'; // Import Analytics
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,6 +32,9 @@ export default function RootLayout({ children }) {
         </div>
 
         <ToastContainer draggable theme="dark" />
+        
+        {/* Add Analytics component */}
+        <Analytics />
       </body>
     </html>
   );
