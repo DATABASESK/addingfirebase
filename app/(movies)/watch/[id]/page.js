@@ -2,7 +2,7 @@ import EpisodeSelector from "@/content/watch/EpisodeSelector/EpisodeSelector"
 import MainVideo from "@/content/watch/MainVideo/MainVideo"
 import './watch.css'
 import MovieInfos from "@/content/watch/MovieInfo/MovieInfo"
-import Rating from "@/content/watch/MovieInfo/Rating"
+
 import { WatchAreaContextProvider } from "@/context/Watch"
 import { WatchSettingContextProvider } from "@/context/WatchSetting"
 import { Fragment } from "react"
