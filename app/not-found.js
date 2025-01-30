@@ -14,8 +14,8 @@ export default function Custom404() {
         `}</style>
       </Head>
 
-      <div className="w-full h-screen bg-white flex flex-col items-center justify-center text-center px-4">
-        <div className="text-lg text-black mb-4">
+      <div className="w-full h-screen bg-[#001f3d] flex flex-col items-center justify-center text-center px-4">
+        <div className="text-lg text-white mb-4">
           <p>This website is a movie platform created as part of a college project.</p>
           <p>It is built solely for educational purposes and is not intended for commercial use or sale.</p>
           <p>Please enjoy browsing the content!</p>
@@ -23,7 +23,7 @@ export default function Custom404() {
 
         {/* Added "Created by" and image */}
         <div className="mt-4">
-          <p className="text-lg">Created by</p>
+          <p className="text-lg text-white">Created by</p>
           <Image
             src="https://th.bing.com/th/id/OIP.SmnQrozPVg1WdFThnnjqhwHaKQ?w=156&h=197&c=7&r=0&o=5&pid=1.7"
             alt="Image"
@@ -35,7 +35,7 @@ export default function Custom404() {
 
         {/* Added Kishore's name with custom font */}
         <div className="mt-4">
-          <p className="text-2xl font-[NightinTokyo]">Kishore</p>
+          <p className="text-2xl font-[NightinTokyo] text-white">Kishore</p>
         </div>
       </div>
     </>
