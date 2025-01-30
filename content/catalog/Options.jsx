@@ -54,8 +54,8 @@ const Options = () => {
       {/* show adult content */}
       <CatalogSelect
         data={[
-          { key: true, value: "Yep, show me" },
-          { key: false, value: "Hell, nah" },
+          { key: true, value: "Yes, show me" },
+          { key: false, value: "Hell, no" },
         ]}
         active={isAdult}
         setActive={setIsAdult}
