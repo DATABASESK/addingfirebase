@@ -12,7 +12,7 @@ const Recommendation = async ({ MovieId, type }) => {
       </div>
 
       <div className="w-full flex flex-col gap-3 sm:grid sm:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] lg:grid-cols-[repeat(auto-fit,minmax(350px,1fr))]">
-        {recommendation?.slice(0, 5)?.map((item, index) => (
+        {recommendation?.slice(0, 12)?.map((item, index) => (
           <Fragment key={index}>
             <RecommendationCard
               data={item}
