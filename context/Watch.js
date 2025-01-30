@@ -1,6 +1,7 @@
 'use client';
 
 import { getEpisodes } from '@/lib/TVfunctions';
+import { saveWatchProgress } from '@/utils/ProgressHandler';
 import { useSearchParams } from 'next/navigation';
 import { createContext, useContext, useEffect, useState, useMemo } from 'react';
 import { toast } from 'react-toastify';
@@ -18,8 +19,6 @@ export function WatchAreaContextProvider({ children, MovieInfo, MovieId }) {
   const [episodeLoading, setEpisodeLoading] = useState(true)
 
   useEffect(() => {
-
-
     const fetchData = async () => {
       try {
         const watchdata = episodes.find(item => item.episode_number === episode)
@@ -34,7 +33,16 @@ export function WatchAreaContextProvider({ children, MovieInfo, MovieId }) {
       fetchData()
     };
 
+
   }, [episode]);
+
+  useEffect(() => {
+
+
+    if (episodes.length !== 0) {
+      saveWatchProgress(MovieInfo, episodes, episode, season)
+    }
+  }, [episode, episodes])
 
   useEffect(() => {
     if (!MovieInfo) return; // Early return if MovieInfo is not available
