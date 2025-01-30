@@ -4,15 +4,22 @@ import { useWatchContext } from "@/context/Watch";
 import EpInfo from "./EpInfo";
 import Option from "./Option"
 import Server from "./Server";
-import VideoPlayer from "./videoPlayer/VideoPlayer";
 
 const MainVideo = () => {
-  const { episode } = useWatchContext();
+  const { watchInfo, MovieInfo, episode } = useWatchContext();
 
   return (
     <div className="w-full bg-[#22212c] rounded-md p-2 !pb-0 flex flex-col">
 
-      <VideoPlayer />
+      <iframe
+        src={watchInfo?.url}
+        className="aspect-video"
+        allowFullScreen
+        loading="lazy"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        title={MovieInfo?.title || MovieInfo?.name || MovieInfo?.original_name || MovieInfo?.original_title}
+      />
 
       <Option />
 
