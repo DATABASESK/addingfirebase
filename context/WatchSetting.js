@@ -16,7 +16,7 @@ export function WatchSettingContextProvider({ children }) {
   return (
     <WatchSettingContext.Provider value={{ watchSetting, setWatchSetting }}>
       <div
-        className="flex gap-3 aspect-video flex-col-reverse max-h-[52rem] "
+        className="flex gap-3 flex-col-reverse max-h-[52rem] "
         style={{ flexDirection: watchSetting.isExpanded && "column-reverse" }}
       >
         {children}
