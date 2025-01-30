@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+/*import { useCallback, useEffect, useState } from "react";
 import { useWatchContext } from "@/context/Watch";
 import clsx from "clsx";
 import Image from "next/image";
@@ -94,4 +94,4 @@ const EpisodeCard = ({ info, currentEp, loading, watchedEP, posterImg }) => {
   );
 };
 
-export default EpisodeCard;
+export default EpisodeCard;*/
