@@ -5,11 +5,11 @@ export default function Custom404() {
         404 - Page Not Found
       </div>
 
-      <div className="text-xl text-gray-700 mb-8">
+      <div className="text-xl text-gray-800 mb-8">
         Oops! It seems you've reached a page that doesn't exist.
       </div>
 
-      <div className="text-lg text-gray-600 max-w-[600px] mb-8">
+      <div className="text-lg text-gray-700 max-w-[600px] mb-8">
         <p>This website is a movie platform created as part of a college project.</p>
         <p>It is built solely for educational purposes and is not intended for commercial use or sale.</p>
         <p>Please enjoy browsing the content, and let us know if you have any questions!</p>
