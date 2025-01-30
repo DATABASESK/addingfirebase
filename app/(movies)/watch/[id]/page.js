@@ -1,4 +1,4 @@
-import EpisodeSelector from "@/content/watch/EpisodeSelector/EpisodeSelector"
+
 import MainVideo from "@/content/watch/MainVideo/MainVideo"
 import './watch.css'
 import MovieInfos from "@/content/watch/MovieInfo/MovieInfo"
@@ -39,7 +39,7 @@ const Watch = async ({ params, searchParams }) => {
           {/* container div in this context ⬇ ⬇ */}
           <WatchSettingContextProvider>
             <WatchAreaContextProvider MovieInfo={MovieInfo} MovieId={MovieId} >
-              <EpisodeSelector />
+            
               <MainVideo />
             </WatchAreaContextProvider>
           </WatchSettingContextProvider>
