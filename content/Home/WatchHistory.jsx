@@ -9,17 +9,19 @@ const WatchHistory = () => {
   const [mappedData, setMappedData] = useState([]);
 
   useEffect(() => {
-    const data = getWatchProgress();
-    if (data) {
-      setMappedData(data);
-    }
+    loadWatchHistory();
   }, []);
 
-  // Function to remove a movie from watch history
+  // Function to load watch history from localStorage
+  const loadWatchHistory = () => {
+    const data = getWatchProgress();
+    setMappedData(data || []);
+  };
+
+  // Function to remove a movie permanently
   const handleRemove = (id) => {
-    const updatedData = mappedData.filter(item => item.id !== id); // Remove from UI
-    setMappedData(updatedData);
-    removeWatchProgress(id); // Remove from local storage
+    removeWatchProgress(id); // Remove from localStorage
+    loadWatchHistory(); // Reload updated data
   };
 
   return mappedData.length < 1 ? null : (
