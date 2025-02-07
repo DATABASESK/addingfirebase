@@ -6,31 +6,26 @@ import { getWatchProgress, removeWatchProgress } from "@/utils/ProgressHandler";
 import Link from "next/link";
 
 const WatchHistory = () => {
-  const [mappedData, setMappedData] = useState([]);
+  const [watchHistory, setWatchHistory] = useState([]);
 
-  // Function to load the watch history from localStorage
+  // Load watch history from localStorage using your function
   const loadWatchHistory = () => {
-    const data = getWatchProgress();
-    setMappedData(data);
+    const data = getWatchProgress(); // by default, it slices to the 4 most recent items
+    setWatchHistory(data);
   };
 
-  // Load data when the component mounts
   useEffect(() => {
     loadWatchHistory();
   }, []);
 
-  // When the bin icon is clicked, remove the movie from localStorage and update the UI
+  // When the bin icon is clicked, remove the movie and reload the list.
   const handleRemove = (id) => {
     removeWatchProgress(id);
-    // Option 1: Reload from localStorage
     loadWatchHistory();
-
-    // Option 2: Alternatively, update state directly:
-    // setMappedData((prev) => prev.filter(item => String(item.id) !== String(id)));
   };
 
-  // If there is no watch history, return null (nothing to show)
-  if (!mappedData || mappedData.length === 0) return null;
+  // If there is no watch history, render nothing.
+  if (!watchHistory || watchHistory.length === 0) return null;
 
   return (
     <div className="w-full max-w-[96rem] relative mx-5">
@@ -48,11 +43,11 @@ const WatchHistory = () => {
       </div>
 
       <div className="mt-8 mb-24 grid grid-cols-[repeat(auto-fit,minmax(343px,1fr))] max-[725px]:grid-cols-[repeat(auto-fit,minmax(285px,1fr))] gap-3">
-        {mappedData.map((data) => (
+        {watchHistory.map((data) => (
           <div key={data.id} className="relative">
             <ContinueWatchingCard data={data} />
 
-            {/* Bin Icon Button to remove the movie */}
+            {/* Bin icon to remove the movie */}
             <button
               onClick={() => handleRemove(data.id)}
               className="absolute top-2 right-2 bg-red-600 p-2 rounded-full text-white hover:bg-red-700 transition"
@@ -64,8 +59,8 @@ const WatchHistory = () => {
         ))}
 
         {/* If there are fewer than 4 movies, fill the grid with hidden cards */}
-        {mappedData.length < 4 &&
-          Array.from({ length: 4 - mappedData.length }).map((_, index) => (
+        {watchHistory.length < 4 &&
+          Array.from({ length: 4 - watchHistory.length }).map((_, index) => (
             <ContinueWatchingCard key={index} hidden />
           ))}
       </div>
