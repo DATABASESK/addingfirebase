@@ -24,7 +24,7 @@ const WatchHistory = () => {
   return mappedData.length < 1 ? null : (
     <div className="w-full max-w-[96rem] relative mx-5">
       <div className="flex justify-between">
-        <h1 className="text-[#f6f4f4ea] font-medium text-2xl font-['poppins'] max-[450px]:text-[1.2rem]">
+        <h1 className="text-[#f6f4f4ea] font-medium text-xl font-['poppins'] max-[450px]:text-[1rem]">
           | Continue Watching
         </h1>
 
@@ -36,23 +36,24 @@ const WatchHistory = () => {
         </Link>
       </div>
 
-      <div className="mt-8 mb-24 grid grid-cols-[repeat(auto-fit,minmax(343px,1fr))] max-[725px]:grid-cols-[repeat(auto-fit,minmax(285px,1fr))] gap-3">
+      {/* Reduced height for movie cards */}
+      <div className="mt-6 mb-16 grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] max-[725px]:grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-2">
         {mappedData.map(data => (
           <div key={data.id} className="relative">
-            <ContinueWatchingCard data={data} />
+            <ContinueWatchingCard data={data} customClass="h-[120px]" /> {/* Adjust height */}
             {/* Bin (trash) icon button */}
             <button
               onClick={() => handleRemove(data.id)}
-              className="absolute top-2 right-2 bg-red-600 p-2 rounded-full text-white hover:bg-red-700 transition"
+              className="absolute top-1 right-1 bg-red-600 p-1 rounded-full text-white hover:bg-red-700 transition"
               title="Remove"
             >
-              <FaTrash size={16} />
+              <FaTrash size={14} />
             </button>
           </div>
         ))}
 
         {(mappedData?.length < 4) ? Array.from({ length: 4 - mappedData?.length }).map((_, idx) => (
-          <ContinueWatchingCard key={idx} hidden />
+          <ContinueWatchingCard key={idx} hidden customClass="h-[120px]" />
         )) : null}
       </div>
     </div>
