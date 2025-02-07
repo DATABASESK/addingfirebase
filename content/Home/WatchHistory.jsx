@@ -15,7 +15,6 @@ const WatchHistory = () => {
     }
   }, []);
 
-  // Remove the movie from both localStorage and state
   const handleRemove = (id) => {
     removeWatchProgress(id);
     setMappedData((prevData) => prevData.filter(item => item.id !== id));
@@ -24,7 +23,7 @@ const WatchHistory = () => {
   return mappedData.length < 1 ? null : (
     <div className="w-full max-w-[96rem] relative mx-5">
       <div className="flex justify-between">
-        <h1 className="text-[#f6f4f4ea] font-medium text-xl font-['poppins'] max-[450px]:text-[1rem]">
+        <h1 className="text-[#f6f4f4ea] font-medium text-2xl font-['poppins'] max-[450px]:text-[1.2rem]">
           | Continue Watching
         </h1>
 
@@ -36,12 +35,10 @@ const WatchHistory = () => {
         </Link>
       </div>
 
-      {/* Reduced height for movie cards */}
-      <div className="mt-6 mb-16 grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] max-[725px]:grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-2">
+      <div className="mt-8 mb-24 grid grid-cols-[repeat(auto-fit,minmax(343px,1fr))] max-[725px]:grid-cols-[repeat(auto-fit,minmax(285px,1fr))] gap-3">
         {mappedData.map(data => (
           <div key={data.id} className="relative">
-            <ContinueWatchingCard data={data} customClass="h-[120px]" /> {/* Adjust height */}
-            {/* Bin (trash) icon button */}
+            <ContinueWatchingCard data={data} customClass="h-[160px]" />
             <button
               onClick={() => handleRemove(data.id)}
               className="absolute top-1 right-1 bg-red-600 p-1 rounded-full text-white hover:bg-red-700 transition"
@@ -53,7 +50,7 @@ const WatchHistory = () => {
         ))}
 
         {(mappedData?.length < 4) ? Array.from({ length: 4 - mappedData?.length }).map((_, idx) => (
-          <ContinueWatchingCard key={idx} hidden customClass="h-[120px]" />
+          <ContinueWatchingCard key={idx} hidden customClass="h-[160px]" />
         )) : null}
       </div>
     </div>
