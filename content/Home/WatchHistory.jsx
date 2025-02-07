@@ -8,27 +8,29 @@ import Link from "next/link";
 const WatchHistory = () => {
   const [mappedData, setMappedData] = useState([]);
 
-  // Load watch history from localStorage
+  // Function to load the watch history from localStorage
   const loadWatchHistory = () => {
     const data = getWatchProgress();
     setMappedData(data);
   };
 
-  // Load the watch history when the component mounts
+  // Load data when the component mounts
   useEffect(() => {
     loadWatchHistory();
   }, []);
 
-  // Remove an item (update both localStorage and state)
+  // When the bin icon is clicked, remove the movie from localStorage and update the UI
   const handleRemove = (id) => {
-    // Remove from localStorage
     removeWatchProgress(id);
-    // Reload updated data from localStorage into state
+    // Option 1: Reload from localStorage
     loadWatchHistory();
+
+    // Option 2: Alternatively, update state directly:
+    // setMappedData((prev) => prev.filter(item => String(item.id) !== String(id)));
   };
 
   // If there is no watch history, return null (nothing to show)
-  if (mappedData.length === 0) return null;
+  if (!mappedData || mappedData.length === 0) return null;
 
   return (
     <div className="w-full max-w-[96rem] relative mx-5">
@@ -49,7 +51,8 @@ const WatchHistory = () => {
         {mappedData.map((data) => (
           <div key={data.id} className="relative">
             <ContinueWatchingCard data={data} />
-            {/* Trash (Bin) Icon Button */}
+
+            {/* Bin Icon Button to remove the movie */}
             <button
               onClick={() => handleRemove(data.id)}
               className="absolute top-2 right-2 bg-red-600 p-2 rounded-full text-white hover:bg-red-700 transition"
@@ -60,6 +63,7 @@ const WatchHistory = () => {
           </div>
         ))}
 
+        {/* If there are fewer than 4 movies, fill the grid with hidden cards */}
         {mappedData.length < 4 &&
           Array.from({ length: 4 - mappedData.length }).map((_, index) => (
             <ContinueWatchingCard key={index} hidden />
