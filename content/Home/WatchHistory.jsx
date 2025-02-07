@@ -1,8 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import ContinueWatchingCard from "@/components/Cards/ContinueWatchingCard/ContinueWatchingCard";
-import { FaArrowRight } from "react-icons/fa";
-import { FaTrash } from "react-icons/fa6"; // Import bin icon
+import { FaArrowRight, FaTrash } from "react-icons/fa";
 import { getWatchProgress, removeWatchProgress } from "@/utils/ProgressHandler";
 import Link from "next/link";
 
@@ -16,10 +15,11 @@ const WatchHistory = () => {
     }
   }, []);
 
-  // Function to remove an item from watch history
+  // Function to remove a movie from watch history
   const handleRemove = (id) => {
-    removeWatchProgress(id); // Remove from storage
-    setMappedData((prevData) => prevData.filter(item => item.id !== id)); // Update UI
+    const updatedData = mappedData.filter(item => item.id !== id); // Remove from UI
+    setMappedData(updatedData);
+    removeWatchProgress(id); // Remove from local storage
   };
 
   return mappedData.length < 1 ? null : (
@@ -39,13 +39,13 @@ const WatchHistory = () => {
 
       <div className="mt-8 mb-24 grid grid-cols-[repeat(auto-fit,minmax(343px,1fr))] max-[725px]:grid-cols-[repeat(auto-fit,minmax(285px,1fr))] gap-3">
         {mappedData.map((data) => (
-          <div key={data.id} className="relative group">
+          <div key={data.id} className="relative">
             <ContinueWatchingCard data={data} />
-            
-            {/* Bin Icon (Delete Button) */}
+
+            {/* Bin Icon Button */}
             <button
               onClick={() => handleRemove(data.id)}
-              className="absolute top-2 right-2 bg-red-600 p-2 rounded-full text-white opacity-0 group-hover:opacity-100 transition duration-300"
+              className="absolute top-2 right-2 bg-red-600 p-2 rounded-full text-white hover:bg-red-700 transition"
               title="Remove"
             >
               <FaTrash size={16} />
