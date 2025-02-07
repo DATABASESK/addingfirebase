@@ -8,20 +8,20 @@ import Link from "next/link";
 const WatchHistory = () => {
   const [mappedData, setMappedData] = useState([]);
 
-  useEffect(() => {
-    loadWatchHistory();
-  }, []);
-
   // Function to load watch history from localStorage
   const loadWatchHistory = () => {
-    const data = getWatchProgress();
-    setMappedData(data || []);
+    const data = getWatchProgress() || [];
+    setMappedData(data);
   };
+
+  useEffect(() => {
+    loadWatchHistory(); // Load data on component mount
+  }, []);
 
   // Function to remove a movie permanently
   const handleRemove = (id) => {
-    removeWatchProgress(id); // Remove from localStorage
-    loadWatchHistory(); // Reload updated data
+    removeWatchProgress(id); // Remove from local storage
+    setMappedData(prevData => prevData.filter(item => item.id !== id)); // Update UI immediately
   };
 
   return mappedData.length < 1 ? null : (
