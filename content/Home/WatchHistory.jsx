@@ -21,7 +21,7 @@ const WatchHistory = () => {
   };
 
   return mappedData.length < 1 ? null : (
-    <div className="w-full max-w-[96rem] mx-5">
+    <div className="w-full max-w-[96rem] mx-5 mb-10 pb-10">  {/* <-- Added extra margin and padding */}
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-[#f6f4f4ea] font-medium text-2xl font-['poppins']">
           | Continue Watching
