@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import ContinueWatchingCard from "@/components/Cards/ContinueWatchingCard/ContinueWatchingCard";
 import { FaArrowRight } from "react-icons/fa";
-import { getWatchProgress, saveWatchProgress } from "@/utils/ProgressHandler";
+import { getWatchProgress } from "@/utils/ProgressHandler";
 import Link from "next/link";
 
 const WatchHistory = () => {
@@ -15,16 +15,6 @@ const WatchHistory = () => {
       setMappedData(data);
     }
   }, []);
-
-  const handleRemove = (id) => {
-    // Remove movie from watch history
-    const movieData = JSON.parse(localStorage.getItem("watch_history") || "{}");
-    delete movieData[id]; // Remove the item by id
-    localStorage.setItem("watch_history", JSON.stringify(movieData));
-
-    // Update state to reflect the change
-    setMappedData(getWatchProgress()); // Re-fetch the progress data
-  };
 
   return mappedData.length < 1 ? null : (
     <div className="w-full max-w-[96rem] relative mx-5">
@@ -43,7 +33,7 @@ const WatchHistory = () => {
 
       <div className="mt-8 mb-24 grid grid-cols-[repeat(auto-fit,minmax(343px,1fr))] max-[725px]:grid-cols-[repeat(auto-fit,minmax(285px,1fr))] gap-3">
         {mappedData.map((data) => (
-          <ContinueWatchingCard key={data.id} data={data} onRemove={handleRemove} />
+          <ContinueWatchingCard key={data.id} data={data} />
         ))}
 
         {mappedData?.length < 4
