@@ -28,7 +28,7 @@ const WatchHistory = () => {
         </h1>
 
         <Link
-          href={/continue-watching}
+          href="/continue-watching" {/* Corrected href here */}
           className="text-[#ffffffbd] flex items-center gap-1 cursor-pointer hover:text-slate-500 transition"
         >
           See All <FaArrowRight />
