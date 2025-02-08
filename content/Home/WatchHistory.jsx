@@ -35,10 +35,10 @@ const WatchHistory = () => {
         </Link>
       </div>
 
-      <div className="mt-8 mb-24 grid grid-cols-[repeat(auto-fit,minmax(280px, 1fr))] max-[725px]:grid-cols-[repeat(auto-fit,minmax(285px,1fr))] gap-3">
+      <div className="mt-8 mb-24 grid grid-cols-[repeat(auto-fit,minmax(200px, 1fr))] max-[725px]:grid-cols-[repeat(auto-fit,minmax(160px,1fr))] gap-3">
         {mappedData.map(data => (
           <div key={data.id} className="relative">
-            <ContinueWatchingCard data={data} customClass="h-[50px]" />
+            <ContinueWatchingCard data={data} customClass="h-[120px] w-[50px]" /> {/* Custom height and width */}
             <button
               onClick={() => handleRemove(data.id)}
               className="absolute top-1 right-1 bg-red-600 p-1 rounded-full text-white hover:bg-red-700 transition"
@@ -50,7 +50,7 @@ const WatchHistory = () => {
         ))}
 
         {(mappedData?.length < 4) ? Array.from({ length: 4 - mappedData?.length }).map((_, idx) => (
-          <ContinueWatchingCard key={idx} hidden customClass="h-[80px]" />
+          <ContinueWatchingCard key={idx} hidden customClass="h-[80px] w-[40px]" />
         )) : null}
       </div>
     </div>
