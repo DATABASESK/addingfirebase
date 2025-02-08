@@ -6,16 +6,14 @@ export const getWatchProgress = (isSlice = true) => {
 
   // Sort the entries based on the date property (most recent first)
   const sortedData = entries.sort(([, a], [, b]) => {
-    const dateA = new Date(a?.date || 0);
-    const dateB = new Date(b?.date || 0);
-    return dateB - dateA;
+    return new Date(b?.date || 0) - new Date(a?.date || 0);
   });
 
   // Slice the array if needed
   const processedData = isSlice ? sortedData.slice(0, 4) : sortedData;
 
   // Map the entries into an array of objects with the desired properties
-  const data = processedData.map(([key, item]) => ({
+  return processedData.map(([key, item]) => ({
     id: key,
     movieid: item.movieid,
     title: item.title,
@@ -28,25 +26,22 @@ export const getWatchProgress = (isSlice = true) => {
     date: item.date || 0,
     thumbnail: item.thumbnail || "",
   }));
-
-  return data;
 };
 
+// Saves watch progress
 export const saveWatchProgress = (data, episodes, episode) => {
-  // Note: Changed default fallback from "[]" to "{}" because we store an object.
   const existed_data = JSON.parse(localStorage.getItem("watch_history") || "{}");
   const id = data?.id;
 
-  if (episodes.length === 0 || episodes[episode - 1]?.title === 0) {
+  if (episodes.length === 0 || !episodes[episode - 1]?.title) {
     return;
   }
 
   const episodeInfo = episodes[episode - 1];
-  console.log(data, episodeInfo);
 
   const historyData = {
     [id]: {
-      title: (episodeInfo?.title || "") || data?.original_name || data?.title,
+      title: episodeInfo?.title || data?.original_name || data?.title || "",
       episode_number: episodeInfo?.episode_number || 1,
       season_number: episodeInfo?.season_number || 1,
       totalepisode: episodes?.length || 1,
@@ -55,14 +50,15 @@ export const saveWatchProgress = (data, episodes, episode) => {
       media_type: data?.type || "movie",
       date: Date.now(),
       movieid: id,
-      thumbnail: `https://image.tmdb.org/t/p/w250_and_h141_bestv2${episodeInfo?.still_path || ""}`,
+      // Use a higher-resolution thumbnail to avoid blurriness
+      thumbnail: `https://image.tmdb.org/t/p/w500${episodeInfo?.still_path || ""}`,
     },
   };
 
   localStorage.setItem("watch_history", JSON.stringify({ ...existed_data, ...historyData }));
 };
 
-// NEW: Remove a movie from the watch history (by its key/id)
+// Remove a movie from the watch history (by its key/id)
 export const removeWatchProgress = (id) => {
   const movieData = JSON.parse(localStorage.getItem("watch_history") || "{}");
   if (movieData.hasOwnProperty(id)) {
