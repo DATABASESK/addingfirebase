@@ -35,7 +35,7 @@ const WatchHistory = () => {
         </Link>
       </div>
 
-      <div className="mt-8 mb-24 grid grid-cols-[repeat(auto-fit,minmax(343px,1fr))] max-[725px]:grid-cols-[repeat(auto-fit,minmax(285px,1fr))] gap-3">
+      <div className="mt-8 mb-24 grid grid-cols-[repeat(auto-fit,minmax(280px, 1fr))] max-[725px]:grid-cols-[repeat(auto-fit,minmax(285px,1fr))] gap-3">
         {mappedData.map(data => (
           <div key={data.id} className="relative">
             <ContinueWatchingCard data={data} customClass="h-[50px]" />
