@@ -21,8 +21,8 @@ const WatchHistory = () => {
   };
 
   return mappedData.length < 1 ? null : (
-    <div className="w-full max-w-[96rem] mx-5 mb-10 pb-10">  {/* <-- Added extra margin and padding */}
-      <div className="flex justify-between items-center mb-4">
+    <div className="w-full max-w-[96rem] mx-auto px-5 mb-14 pb-14">  
+      <div className="flex justify-between items-center mb-6">
         <h1 className="text-[#f6f4f4ea] font-medium text-2xl font-['poppins']">
           | Continue Watching
         </h1>
@@ -35,13 +35,21 @@ const WatchHistory = () => {
         </Link>
       </div>
 
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4">
+      {/* Grid with 3 movies per row */}
+      <div className="grid grid-cols-3 gap-6 max-[900px]:grid-cols-2 max-[600px]:grid-cols-1">
         {mappedData.map((data) => (
-          <div key={data.id} className="relative">
-            <ContinueWatchingCard data={data} customClass="h-[160px]" />
+          <div key={data.id} className="relative bg-black p-3 rounded-lg">
+            {/* Full Movie Name */}
+            <p className="text-white font-semibold text-lg truncate">
+              {data.title}
+            </p>
+
+            <ContinueWatchingCard data={data} customClass="h-[180px]" />
+
+            {/* Play Button at Bottom Right */}
             <button
               onClick={() => handleRemove(data.id)}
-              className="absolute top-2 right-2 bg-red-600 p-2 rounded-full text-white hover:bg-red-700 transition"
+              className="absolute bottom-2 right-2 bg-red-600 p-2 rounded-full text-white hover:bg-red-700 transition"
               title="Remove"
             >
               <FaTrash size={16} />
@@ -49,10 +57,10 @@ const WatchHistory = () => {
           </div>
         ))}
 
-        {/* Filler Cards for Consistent UI */}
-        {mappedData.length < 4 &&
-          Array.from({ length: 4 - mappedData.length }).map((_, idx) => (
-            <ContinueWatchingCard key={idx} hidden customClass="h-[160px]" />
+        {/* Filler Cards for Alignment */}
+        {mappedData.length % 3 !== 0 &&
+          Array.from({ length: 3 - (mappedData.length % 3) }).map((_, idx) => (
+            <ContinueWatchingCard key={idx} hidden customClass="h-[180px]" />
           ))}
       </div>
     </div>
