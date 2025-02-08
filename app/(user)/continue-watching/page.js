@@ -6,12 +6,14 @@ import { Fragment, useEffect, useState } from "react"
 
 const ContinueWatching = () => {
   const [mappedData, setMappedData] = useState([]);
+  const [page, setPage] = useState(1)
 
   useEffect(() => {
-    const data = getWatchProgress(false)
+    const data = getWatchProgress(true, page, 20)
 
     if (data) {
       setMappedData(data);
+      setMappedData([...data]);
     }
   }, []);
 
