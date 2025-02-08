@@ -1,16 +1,17 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { FaPlay, FaTrash } from "react-icons/fa6"; // Add trash icon for remove
+import { FaPlay, FaTrashAlt } from "react-icons/fa";
+import { removeFromWatchHistory } from "@/utils/ProgressHandler";
 
-const ContinueWatchingCard = ({ data, hidden, onRemove }) => {
+const ContinueWatchingCard = ({ data, hidden }) => {
   if (hidden) {
     return <div className=""></div>;
   }
 
-  const handleRemove = (event) => {
-    event.preventDefault(); // Prevent page refresh
-    onRemove(data.id); // Call the onRemove function passed as a prop
+  const handleRemove = () => {
+    removeFromWatchHistory(data?.id);
+    window.location.reload(); // Reload the page to reflect changes
   };
 
   return (
@@ -38,7 +39,7 @@ const ContinueWatchingCard = ({ data, hidden, onRemove }) => {
               </div>
             </div>
 
-            <div className="p-[13px] rounded-full flex items-center justify-center bg-[#1a212bd0] text-[#8c97a7] cursor-pointer border border-[#242b35] backdrop-blur-sm hover:bg-[#2c3440d0] hover:text-[#abbcd5] duration-100 ">
+            <div className="p-[13px] rounded-full flex items-center justify-center bg-[#1a212bd0] text-[#8c97a7] cursor-pointer border border-[#242b35] backdrop-blur-sm hover:bg-[#2c3440d0] hover:text-[#abbcd5] duration-100">
               <FaPlay />
             </div>
           </div>
@@ -50,13 +51,13 @@ const ContinueWatchingCard = ({ data, hidden, onRemove }) => {
             ></div>
           </div>
         </div>
-        {/* Remove Button */}
-        <button
-          onClick={handleRemove}
-          className="absolute top-2 right-2 p-2 bg-red-500 rounded-full text-white"
-        >
-          <FaTrash />
-        </button>
+      </div>
+
+      <div
+        className="absolute top-2 right-2 p-2 cursor-pointer text-white"
+        onClick={handleRemove}
+      >
+        <FaTrashAlt />
       </div>
     </Link>
   );
