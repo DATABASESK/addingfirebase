@@ -14,9 +14,9 @@ export default function Custom404() {
         `}</style>
       </Head>
 
-      <div className="w-full h-screen bg-[#001f3d] flex flex-col items-center justify-center text-center px-6 py-8">
-        <div className="bg-[#002a4d] p-6 rounded-lg shadow-lg max-w-3xl text-left">
-          <h1 className="text-2xl font-bold text-white mb-4 text-center">Legal Disclaimer</h1>
+      <div className="w-full min-h-screen bg-[#001f3d] flex flex-col items-center justify-center text-center px-6 py-8 space-y-6 pt-20">
+        <div className="bg-[#002a4d] p-6 rounded-lg shadow-lg max-w-3xl">
+          <h1 className="text-2xl font-bold text-white mb-4">Legal Disclaimer</h1>
           <p className="text-white text-sm leading-relaxed">
             SK MOVIES does not host any files on its servers. All content is provided by third-party services.
           </p>
@@ -34,13 +34,13 @@ export default function Custom404() {
           </p>
           <h2 className="text-xl font-semibold text-white mt-4">Limitation of Liability</h2>
           <p className="text-white text-sm leading-relaxed">
-            SK MOVIES and its affiliates are not liable for any damages resulting from:
+            SK MOVIES and its affiliates are not liable for any direct or indirect damages resulting from:
           </p>
-          <ul className="list-disc text-white text-sm pl-6">
-            <li>Your use or inability to use the service.</li>
-            <li>Any content accessed via third-party services.</li>
-            <li>Unauthorized access to or alteration of data.</li>
-            <li>Statements or conduct of any third party on the service.</li>
+          <ul className="list-disc text-white text-sm pl-6 text-left">
+            <li>Your use or inability to use the service</li>
+            <li>Any content accessed via third-party services</li>
+            <li>Unauthorized access to or alteration of data</li>
+            <li>Statements or conduct of any third party on the service</li>
           </ul>
         </div>
 
@@ -51,7 +51,7 @@ export default function Custom404() {
             alt="Creator Image"
             width={156}
             height={197}
-            className="rounded-lg shadow-lg mt-2 object-cover"
+            className="rounded-lg shadow-lg mt-2"
           />
           <p className={`${nightTokyo.className} text-3xl text-white mt-2`}>Kishore</p>
         </div>
