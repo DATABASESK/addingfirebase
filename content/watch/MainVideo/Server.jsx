@@ -6,6 +6,7 @@ const Server = () => {
     useWatchContext();
 
   const MovieVideoPlayers = {
+    sk3:`https://vidlink.pro/movie/${MovieId}`, 
     "vidsrc.dev": `https://vidsrc.dev/embed/movie/${MovieId}`,
     "vidsrc.cc": `https://vidsrc.cc/v2/embed/movie/${MovieId}`,
     vidsrc: `https://vidsrc.in/embed/movie/${MovieId}`,
@@ -19,6 +20,7 @@ const Server = () => {
   };
 
   const TVVideoPlayers = {
+     sk3:`https://vidlink.pro/tv/${MovieId}/${season}/${episode}`, 
     "vidsrc.in": `https://vidsrc.in/embed/tv/${MovieId}/${season}/${episode}`,
     "vidsrc.me": `https://vidsrc.me/v2/embed/tv/${MovieId}/${season}/${episode}`,
     vidsrc: `https://vidsrc.in/embed/tv/${MovieId}/${season}/${episode}`,
