@@ -6,11 +6,16 @@ const Server = () => {
     useWatchContext();
 
   const MovieVideoPlayers = {
-    "vidsrc.in": `https://vidsrc.in/embed/movie/${MovieId}`,
-    "vidsrc.me": `https://vidsrc.me/v2/embed/movie/${MovieId}`,
+    "vidsrc.dev": `https://vidsrc.dev/embed/movie/${MovieId}`,
+    "vidsrc.cc": `https://vidsrc.cc/v2/embed/movie/${MovieId}`,
     vidsrc: `https://vidsrc.in/embed/movie/${MovieId}`,
     vidsrcpro: `https://vidsrc.pro/embed/movie/${MovieId}`,
     autoembed: `https://player.autoembed.cc/embed/movie/${MovieId}`,
+    sk1:`https://moviesapi.club/movie/${MovieId}`,
+    sk2:`https://111movies.com/movie/${MovieId}`,  
+    sk3:`https://vidlink.pro/movie/${MovieId}`,  
+    sk4:`https://embed.rgshows.me/api/2/movie/?id=${MovieId}`,
+    sk5:`https://multiembed.mov/?video_id=${MovieId}&tmdb=1`,
   };
 
   const TVVideoPlayers = {
@@ -19,6 +24,10 @@ const Server = () => {
     vidsrc: `https://vidsrc.in/embed/tv/${MovieId}/${season}/${episode}`,
     vidsrcpro: `https://vidsrc.pro/embed/tv/${MovieId}/${season}/${episode}`,
     autoembed: `https://player.autoembed.cc/embed/tv/${MovieId}/${season}/${episode}`,
+    sk1:`https://moviesapi.club/tv/${MovieId}/${season}/${episode}`,
+    sk2:`https://111movies.com/tv/${MovieId}/${season}/${episode}`, 
+    sk3:`https://vidlink.pro/tv/${MovieId}/${season}/${episode}`, 
+    sk4:`https://embed.rgshows.me/api/2/tv/?id=${MovieId}&s=${season}&e=${episode}`,
   };
 
   const MovievideoPlayerEntry = Object.entries(MovieVideoPlayers);
