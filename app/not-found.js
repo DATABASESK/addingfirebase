@@ -1,11 +1,10 @@
-import Image from 'next/image'; // Import Next.js Image component
-import Head from 'next/head'; // If you want to include custom font via `@font-face`
-import { nightTokyo } from "@/utils/fonts"; // Import the nightTokyo font
+import Image from 'next/image';
+import Head from 'next/head';
+import { nightTokyo } from "@/utils/fonts";
 
 export default function Custom404() {
   return (
     <>
-      {/* Adding custom font via @font-face */}
       <Head>
         <style>{`
           @font-face {
@@ -15,56 +14,46 @@ export default function Custom404() {
         `}</style>
       </Head>
 
-      <div className="w-full h-screen bg-[#001f3d] flex flex-col items-center justify-center text-center px-4">
-        {/* Disclaimer Section */}
-        <div className="font-bold text-white text-lg mb-4 space-y-4">
-          <p className="text-xl">Legal Disclaimer</p>
-          <p>
+      <div className="w-full h-screen bg-[#001f3d] flex flex-col items-center justify-center text-center px-6 py-8 space-y-6">
+        <div className="bg-[#002a4d] p-6 rounded-lg shadow-lg max-w-3xl">
+          <h1 className="text-2xl font-bold text-white mb-4">Legal Disclaimer</h1>
+          <p className="text-white text-sm leading-relaxed">
             SK MOVIES does not host any files on its servers. All content is provided by third-party services.
           </p>
-          <p className="text-xl">Important Notice</p>
-          <p>
-            SK MOVIES is a content aggregator that only links to third-party services and providers. <br/>
-            We do not host, upload, or distribute any videos, films, or media files. <br/>
-            All media content displayed is hosted by external services not affiliated with SK MOVIES. <br/>
-            Any legal issues regarding the content should be directed to the respective file hosts and providers.
+          <h2 className="text-xl font-semibold text-white mt-4">Important Notice</h2>
+          <p className="text-white text-sm leading-relaxed">
+            SK MOVIES is a content aggregator linking to third-party providers. We do not host, upload, or distribute any media files. All displayed content is hosted by external services not affiliated with SK MOVIES. Any legal issues should be directed to the respective file hosts.
           </p>
-          <p className="text-xl">Terms of Use</p>
-          <p>
-            By using SK MOVIES, you acknowledge and agree that we are not responsible for and have no control over the content displayed through third-party services. <br/>
-            Users are responsible for ensuring their use of third-party services complies with applicable laws and regulations. <br/>
-            SK MOVIES reserves the right to modify, suspend, or discontinue any aspect of the service at any time without notice.
+          <h2 className="text-xl font-semibold text-white mt-4">Terms of Use</h2>
+          <p className="text-white text-sm leading-relaxed">
+            By using SK MOVIES, you acknowledge that we are not responsible for and have no control over third-party content. Users must ensure their usage complies with applicable laws. SK MOVIES reserves the right to modify or discontinue any aspect of the service at any time without notice.
           </p>
-          <p className="text-xl">Copyright and DMCA</p>
-          <p>
-            If you believe your copyrighted work has been linked to without authorization, please contact the respective hosting services directly. SK MOVIES is not responsible for hosting or removing content from third-party services. <br/>
-            As a content aggregator, SK MOVIES operates under the safe harbor provisions of the Digital Millennium Copyright Act (DMCA) and similar regulations worldwide.
+          <h2 className="text-xl font-semibold text-white mt-4">Copyright and DMCA</h2>
+          <p className="text-white text-sm leading-relaxed">
+            If you believe your copyrighted work has been linked without authorization, please contact the respective hosting service. SK MOVIES operates under DMCA safe harbor provisions and similar regulations worldwide.
           </p>
-          <p className="text-xl">Limitation of Liability</p>
-          <p>
-            SK MOVIES, its operators, affiliates, and licensors shall not be liable for any direct, indirect, incidental, special, consequential, or exemplary damages resulting from: <br/>
-            - Your use or inability to use the service <br/>
-            - Any content accessed through third-party services <br/>
-            - Unauthorized access to or alteration of your transmissions or data <br/>
-            - Statements or conduct of any third party on the service
+          <h2 className="text-xl font-semibold text-white mt-4">Limitation of Liability</h2>
+          <p className="text-white text-sm leading-relaxed">
+            SK MOVIES and its affiliates are not liable for any direct or indirect damages resulting from:
           </p>
+          <ul className="list-disc text-white text-sm pl-6">
+            <li>Your use or inability to use the service</li>
+            <li>Any content accessed via third-party services</li>
+            <li>Unauthorized access to data</li>
+            <li>Third-party statements or conduct</li>
+          </ul>
         </div>
 
-        {/* Created by Section */}
-        <div className="mt-4">
-          <p className="text-lg text-white">Created by</p>
+        <div className="flex flex-col items-center">
+          <p className="text-lg text-white font-semibold">Created by</p>
           <Image
             src="https://th.bing.com/th/id/OIP.SmnQrozPVg1WdFThnnjqhwHaKQ?w=156&h=197&c=7&r=0&o=5&pid=1.7"
-            alt="Image"
+            alt="Creator Image"
             width={156}
             height={197}
-            className="rounded-md mt-2"
+            className="rounded-lg shadow-lg mt-2"
           />
-        </div>
-
-        {/* Name Section */}
-        <div className="mt-4">
-          <p className={`${nightTokyo.className} text-3xl text-white`}>Kishore</p>
+          <p className={`${nightTokyo.className} text-3xl text-white mt-2`}>Kishore</p>
         </div>
       </div>
     </>
