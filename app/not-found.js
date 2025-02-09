@@ -3,13 +3,6 @@ import Head from 'next/head';
 import { nightTokyo } from "@/utils/fonts";
 
 export default function Custom404() {
-  const currentDate = new Date().toLocaleDateString('en-IN', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    timeZone: 'Asia/Kolkata'
-  });
-
   return (
     <>
       <Head>
@@ -62,11 +55,11 @@ export default function Custom404() {
           />
           <p className={`${nightTokyo.className} text-3xl text-white mt-2`}>Kishore</p>
         </div>
-
-        <footer className="text-white text-sm mt-6">
-          &copy; 2025 All rights reserved | Last updated: {currentDate}
-        </footer>
       </div>
+      
+      <footer className="w-full text-center py-4 text-white text-sm bg-[#001f3d] absolute bottom-0">
+        &copy; 2025 All rights reserved | Last updated: {new Date().toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })}
+      </footer>
     </>
   );
 }
