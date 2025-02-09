@@ -18,19 +18,39 @@ export default function Custom404() {
       <div className="w-full h-screen bg-[#001f3d] flex flex-col items-center justify-center text-center px-4">
         {/* Disclaimer Section */}
         <div className="font-bold text-white text-lg mb-4 space-y-4">
-          <p className="text-xl">Disclaimer!</p>
+          <p className="text-xl">Legal Disclaimer</p>
           <p>
-            SK MOVIES does not host any files; it merely pulls streams from third-party services. 
-            Legal issues should be taken up with the file hosts and providers. SK MOVIES is not 
-            responsible for any media files shown by the video providers. This website is a movie 
-            platform created as part of a college project, built solely for educational purposes 
-            and not intended for commercial use or sale. By using this site, you acknowledge that 
-            you understand the educational nature of the project and the third-party nature of the 
-            content provided.
+            SK MOVIES does not host any files on its servers. All content is provided by third-party services.
+          </p>
+          <p className="text-xl">Important Notice</p>
+          <p>
+            SK MOVIES is a content aggregator that only links to third-party services and providers. <br/>
+            We do not host, upload, or distribute any videos, films, or media files. <br/>
+            All media content displayed is hosted by external services not affiliated with SK MOVIES. <br/>
+            Any legal issues regarding the content should be directed to the respective file hosts and providers.
+          </p>
+          <p className="text-xl">Terms of Use</p>
+          <p>
+            By using SK MOVIES, you acknowledge and agree that we are not responsible for and have no control over the content displayed through third-party services. <br/>
+            Users are responsible for ensuring their use of third-party services complies with applicable laws and regulations. <br/>
+            SK MOVIES reserves the right to modify, suspend, or discontinue any aspect of the service at any time without notice.
+          </p>
+          <p className="text-xl">Copyright and DMCA</p>
+          <p>
+            If you believe your copyrighted work has been linked to without authorization, please contact the respective hosting services directly. SK MOVIES is not responsible for hosting or removing content from third-party services. <br/>
+            As a content aggregator, SK MOVIES operates under the safe harbor provisions of the Digital Millennium Copyright Act (DMCA) and similar regulations worldwide.
+          </p>
+          <p className="text-xl">Limitation of Liability</p>
+          <p>
+            SK MOVIES, its operators, affiliates, and licensors shall not be liable for any direct, indirect, incidental, special, consequential, or exemplary damages resulting from: <br/>
+            - Your use or inability to use the service <br/>
+            - Any content accessed through third-party services <br/>
+            - Unauthorized access to or alteration of your transmissions or data <br/>
+            - Statements or conduct of any third party on the service
           </p>
         </div>
 
-        {/* Added "Created by" and image */}
+        {/* Created by Section */}
         <div className="mt-4">
           <p className="text-lg text-white">Created by</p>
           <Image
@@ -42,7 +62,7 @@ export default function Custom404() {
           />
         </div>
 
-        {/* Added Kishore's name with custom font and correct size */}
+        {/* Name Section */}
         <div className="mt-4">
           <p className={`${nightTokyo.className} text-3xl text-white`}>Kishore</p>
         </div>
