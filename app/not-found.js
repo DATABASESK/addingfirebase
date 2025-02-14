@@ -57,9 +57,10 @@ export default function Custom404() {
         </div>
       </div>
       
-      <footer className="w-full text-center py-4 text-white text-sm bg-[#001f3d] absolute bottom-0">
-        &copy; 2025 All rights reserved | Last updated: {new Date().toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })}
-      </footer>
+      <footer className="w-full text-center py-4 text-white text-sm bg-[#001f3d] mt-auto">
+  &copy; 2025 All rights reserved | Last updated: {new Date().toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })}
+</footer>
+
     </>
   );
-}
+  }
