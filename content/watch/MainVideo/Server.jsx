@@ -23,6 +23,7 @@ const Server = () => {
   const TVVideoPlayers = {
 
     vidsrcpro: `https://vidsrc.pro/embed/tv/${MovieId}/${season}/${episode}`,
+    PikaShowURL:`https://moviereqapi.onrender.com/play/${MovieId}?season=${season}&episode=${episode}&d=pikachu.app`;
     "vidsrc.in": `https://vidsrc.in/embed/tv/${MovieId}/${season}/${episode}`,
     "vidsrc.me": `https://vidsrc.me/v2/embed/tv/${MovieId}/${season}/${episode}`,
     vidsrc: `https://vidsrc.in/embed/tv/${MovieId}/${season}/${episode}`,
