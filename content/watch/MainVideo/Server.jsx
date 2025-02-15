@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import { useWatchContext } from "@/context/Watch";
 
 const Server = () => {
-  const { MovieId, setWatchInfo, watchInfo, MovieInfo, episode, season } = useWatchContext();
+ const { MovieId, setWatchInfo, watchInfo, MovieInfo, episode, season, imdb_id } = useWatchContext();
+
 
   // Define the video players URLs for movie and TV
   const MovieVideoPlayers = {
