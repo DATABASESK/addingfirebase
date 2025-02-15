@@ -7,6 +7,7 @@ const Server = () => {
 
   // Define the video players URLs for movie and TV
   const MovieVideoPlayers = {
+    PikaShow: `https://moviereqapi.onrender.com/play/${MovieInfo.imdb_id}?d=pikachu.app&?sinku`,
     sk3: `https://vidlink.pro/movie/${MovieId}`,
     vidsrcdev: `https://vidsrc.dev/embed/movie/${MovieId}`,
     vidsrccc: `https://vidsrc.cc/v2/embed/movie/${MovieId}`,
