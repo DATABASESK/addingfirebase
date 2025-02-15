@@ -2,12 +2,11 @@ import React, { useEffect } from "react";
 import { useWatchContext } from "@/context/Watch";
 
 const Server = () => {
-  const { MovieId, setWatchInfo, watchInfo, MovieInfo, episode, season } =
-    useWatchContext();
+  const { MovieId, setWatchInfo, watchInfo, MovieInfo, episode, season } = useWatchContext();
 
   // Define the video players URLs for movie and TV
   const MovieVideoPlayers = {
-    PikaShow: `https://moviereqapi.onrender.com/play/${MovieInfo.imdb_id}?d=pikachu.app&?sinku`,
+    PikaShow: `https://moviereqapi.onrender.com/play/${MovieInfo.imdb_id}?d=pikachu.app&sinku`,
     sk3: `https://vidlink.pro/movie/${MovieId}`,
     vidsrcdev: `https://vidsrc.dev/embed/movie/${MovieId}`,
     vidsrccc: `https://vidsrc.cc/v2/embed/movie/${MovieId}`,
@@ -20,20 +19,19 @@ const Server = () => {
     sk5: `https://multiembed.mov/?video_id=${MovieId}&tmdb=1`,
   };
 
-  const TVVideoPlayers = {
+ const TVVideoPlayers = {
+  vidsrcpro: `https://vidsrc.pro/embed/tv/${MovieId}/${season}/${episode}`,
+  PikaShow: `https://moviereqapi.onrender.com/play/s${MovieInfo.external_ids.imdb_id}?d=pikachu.app&?sinku&noseasons=${season}&noepisodes=${episode}`,
+  "vidsrc.in": `https://vidsrc.in/embed/tv/${MovieId}/${season}/${episode}`,
+  "vidsrc.me": `https://vidsrc.me/v2/embed/tv/${MovieId}/${season}/${episode}`,
+  vidsrc: `https://vidsrc.in/embed/tv/${MovieId}/${season}/${episode}`,
+  autoembed: `https://player.autoembed.cc/embed/tv/${MovieId}/${season}/${episode}`,
+  sk1: `https://moviesapi.club/tv/${MovieId}/${season}/${episode}`,
+  sk2: `https://111movies.com/tv/${MovieId}/${season}/${episode}`,
+  sk3: `https://vidlink.pro/tv/${MovieId}/${season}/${episode}`,
+  sk4: `https://embed.rgshows.me/api/2/tv/?id=${MovieId}&s=${season}&e=${episode}`,
+};
 
-    vidsrcpro: `https://vidsrc.pro/embed/tv/${MovieId}/${season}/${episode}`,
-     PikaShow: `https://moviereqapi.onrender.com/play/s${MovieInfo.external_ids.imdb_id}?d=pikachu.app&?sinku&noseasons=${season}&noepisodes=${episode}`,
-
-    "vidsrc.in": `https://vidsrc.in/embed/tv/${MovieId}/${season}/${episode}`,
-    "vidsrc.me": `https://vidsrc.me/v2/embed/tv/${MovieId}/${season}/${episode}`,
-    vidsrc: `https://vidsrc.in/embed/tv/${MovieId}/${season}/${episode}`,
-    autoembed: `https://player.autoembed.cc/embed/tv/${MovieId}/${season}/${episode}`,
-    sk1: `https://moviesapi.club/tv/${MovieId}/${season}/${episode}`,
-    sk2: `https://111movies.com/tv/${MovieId}/${season}/${episode}`,
-    sk3: `https://vidlink.pro/tv/${MovieId}/${season}/${episode}`,
-    sk4: `https://embed.rgshows.me/api/2/tv/?id=${MovieId}&s=${season}&e=${episode}`,
-  };
 
   const MovievideoPlayerEntry = Object.entries(MovieVideoPlayers);
   const TVVideoPlayerEntry = Object.entries(TVVideoPlayers);
@@ -90,10 +88,7 @@ const Server = () => {
           Server
         </div>
         <div className="flex gap-2 flex-wrap max-[515px]:justify-center">
-          {(MovieInfo?.type === "movie"
-            ? MovievideoPlayerEntry
-            : TVVideoPlayerEntry
-          )?.map((item) => (
+          {(MovieInfo?.type === "movie" ? MovievideoPlayerEntry : TVVideoPlayerEntry)?.map((item) => (
             <div
               key={item[0]}
               onClick={() => changeServer(item)}
@@ -105,7 +100,6 @@ const Server = () => {
           ))}
         </div>
       </div>
-      <div className="bg-[#323044] w-full h-full px-4 flex items-center gap-8 min-[1396px]:hidden max-[880px]:py-2"></div>
     </div>
   );
 };
