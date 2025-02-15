@@ -1,6 +1,6 @@
 import { useWatchContext } from "@/context/Watch"
 import { useEffect, useState } from "react"
-import { fetchMovies, fetchSeries, fetchSeriesServerUrl, fetchMovieServerUrl } from '../../../lib/ServerComponent'
+
 const Server = () => {
   const { MovieId, setWatchInfo, watchInfo, MovieInfo, episode, season } = useWatchContext()
   const [streamWishUrl, setStreamWishUrl] = useState(null);
