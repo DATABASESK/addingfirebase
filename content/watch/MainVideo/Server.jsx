@@ -62,21 +62,17 @@ const Server = () => {
   }, [MovieInfo]);
 
   return (
-    <div className="w-full flex flex-col gap-4">
+    <div className="w-full flex flex-col gap-4 relative overflow-hidden">
+      {/* Snowfall Effect */}
+      <div className="snowfall-container">
+        {Array.from({ length: 50 }).map((_, index) => (
+          <div key={index} className="snowflake">❄</div>
+        ))}
+      </div>
+
       {/* Glowing Gradient "Select a Server" Header */}
       <div 
-        className="px-5 py-3 text-lg font-bold text-white rounded-md shadow-lg transition-all duration-300 text-center"
-        style={{
-          background: "linear-gradient(45deg, #ff00ff, #00ffff, #ff6600)",
-          boxShadow: "0 0 10px 4px rgba(255, 255, 255, 0.8)",
-          textShadow: "2px 2px 5px rgba(0, 0, 0, 0.7)",
-          letterSpacing: "1px",
-          border: "2px solid rgba(255, 255, 255, 0.5)",
-          cursor: "pointer",
-          display: "inline-block",
-          margin: "auto",
-          maxWidth: "200px"
-        }}
+        className="server-header"
       >
         Select a Server
       </div>
@@ -87,28 +83,92 @@ const Server = () => {
           <div
             key={item[0]}
             onClick={() => changeServer(item)}
-            style={{
-              background: `linear-gradient(45deg, ${index % 2 === 0 ? "#ff0080, #8000ff" : "#00ffff, #ff6600"})`,
-              boxShadow: watchInfo?.url === item[1] 
-                ? "0px 0px 15px 5px rgba(255, 255, 255, 0.9)" 
-                : "0px 0px 10px rgba(0, 0, 0, 0.5)",
-              color: "#fff",
-              padding: "10px 20px",
-              borderRadius: "10px",
-              cursor: "pointer",
-              fontWeight: "bold",
-              transition: "all 0.3s ease",
-              textAlign: "center",
-              fontSize: "16px",
-              border: "2px solid rgba(255, 255, 255, 0.6)",
-              textShadow: "1px 1px 3px rgba(0, 0, 0, 0.7)",
-            }}
-            className="hover:scale-105 transform transition-all duration-300"
+            className="server-button"
           >
             {item[0]}
           </div>
         ))}
       </div>
+
+      {/* CSS Styling */}
+      <style jsx>{`
+        .server-header {
+          background: linear-gradient(45deg, #ff00ff, #00ffff, #ff6600);
+          box-shadow: 0 0 10px 4px rgba(255, 255, 255, 0.8);
+          text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+          border: 2px solid rgba(255, 255, 255, 0.5);
+          padding: 12px 20px;
+          border-radius: 10px;
+          font-size: 18px;
+          font-weight: bold;
+          text-align: center;
+          cursor: pointer;
+          display: inline-block;
+          margin: auto;
+          max-width: 200px;
+        }
+
+        .server-button {
+          background: linear-gradient(45deg, #ff0080, #8000ff);
+          box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.6);
+          color: #fff;
+          padding: 10px 20px;
+          border-radius: 10px;
+          cursor: pointer;
+          font-weight: bold;
+          transition: all 0.3s ease;
+          text-align: center;
+          font-size: 16px;
+          border: 2px solid rgba(255, 255, 255, 0.6);
+          text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+
+        .server-button:hover {
+          transform: scale(1.1);
+          box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+        }
+
+        /* Snowfall Animation */
+        .snowfall-container {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          z-index: -1;
+        }
+
+        .snowflake {
+          position: absolute;
+          top: -10px;
+          font-size: 18px;
+          color: rgba(255, 255, 255, 0.9);
+          animation: snowfall linear infinite;
+        }
+
+        @keyframes snowfall {
+          0% {
+            transform: translateY(0);
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(100vh);
+            opacity: 0;
+          }
+        }
+
+        /* Randomized snowflake positions */
+        ${Array.from({ length: 50 })
+          .map((_, index) => `
+            .snowflake:nth-child(${index + 1}) {
+              left: ${Math.random() * 100}%;
+              animation-duration: ${Math.random() * 3 + 2}s;
+              animation-delay: ${Math.random() * 2}s;
+            }
+          `)
+          .join("")}
+      `}</style>
     </div>
   );
 };
