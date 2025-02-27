@@ -7,7 +7,7 @@ import { useWatchContext } from "@/context/Watch";
 
 const Option = () => {
   const { setWatchSetting, watchSetting } = useWatchSettingContext();
-  const { setEpisode, MovieInfo } = useWatchContext();
+  const { setEpisode, MovieInfo, episode } = useWatchContext(); // Ensure episode state is included
 
   const toggleFullscreen = () => {
     const elem = document.documentElement; // Use the whole document as the fullscreen element
@@ -83,7 +83,10 @@ const Option = () => {
           className="flex items-center gap-2 cursor-pointer"
           onClick={() => {
             if (MovieInfo?.type === "tv") {
-              setEpisode(prev => prev > 1 ? prev - 1 : prev);
+              setEpisode(prev => {
+                console.log("Previous Episode:", prev);
+                return prev > 1 ? prev - 1 : prev;
+              });
             }
           }}
         >
@@ -94,7 +97,10 @@ const Option = () => {
           className="flex items-center gap-2 cursor-pointer"
           onClick={() => {
             if (MovieInfo?.type === "tv") {
-              setEpisode(prev => prev + 1);
+              setEpisode(prev => {
+                console.log("Next Episode:", prev + 1);
+                return prev + 1;
+              });
             }
           }}
         >
