@@ -60,7 +60,7 @@ const Server = () => {
 
   return (
     <div className="w-full flex flex-col gap-4">
-      {/* Plain White "Select a Server" Header */}
+      {/* Plain White "Select an Server" Header */}
       <div className="server-header">
         Select a Server
       </div>
