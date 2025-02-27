@@ -5,29 +5,29 @@ const Server = () => {
   const { MovieId, setWatchInfo, watchInfo, MovieInfo, episode, season } = useWatchContext();
 
   // Load URLs from environment variables
- const MovieVideoPlayers = {
-    SK_Server_1: `${process.env.NEXT_PUBLIC_PIKASHOW}${MovieInfo?.imdb_id}?d=pikachu.app&sinku`,
-    SK_Server_2: `${process.env.NEXT_PUBLIC_VIDLINK}${MovieId}`,
-    SK_Server_3: `${process.env.NEXT_PUBLIC_VIDSRCDEV}${MovieId}`,
-    SK_Server_4: `${process.env.NEXT_PUBLIC_VIDSRC_CC}${MovieId}`,
-    SK_Server_5: `${process.env.NEXT_PUBLIC_VIDSRC_IN}${MovieId}`,
-    SK_Server_6: `${process.env.NEXT_PUBLIC_VIDSRC_PRO}${MovieId}`,
-    SK_Server_7: `${process.env.NEXT_PUBLIC_AUTOEMBED}${MovieId}`,
-    SK_Server_8: `${process.env.NEXT_PUBLIC_MOVIESAPI}${MovieId}`,
-    SK_Server_9: `${process.env.NEXT_PUBLIC_111MOVIES}${MovieId}`,
-    SK_Server_10: `${process.env.NEXT_PUBLIC_RGSHOWS}${MovieId}`,
-    SK_Server_11: `${process.env.NEXT_PUBLIC_MULTIEMBED}${MovieId}&tmdb=1`
+  const MovieVideoPlayers = {
+    "Server 1": `${process.env.NEXT_PUBLIC_PIKASHOW}${MovieInfo?.imdb_id}?d=pikachu.app&sinku`,
+    "Server 2": `${process.env.NEXT_PUBLIC_VIDLINK}${MovieId}`,
+    "Server 3": `${process.env.NEXT_PUBLIC_VIDSRCDEV}${MovieId}`,
+    "Server 4": `${process.env.NEXT_PUBLIC_VIDSRC_CC}${MovieId}`,
+    "Server 5": `${process.env.NEXT_PUBLIC_VIDSRC_IN}${MovieId}`,
+    "Server 6": `${process.env.NEXT_PUBLIC_VIDSRC_PRO}${MovieId}`,
+    "Server 7": `${process.env.NEXT_PUBLIC_AUTOEMBED}${MovieId}`,
+    "Server 8": `${process.env.NEXT_PUBLIC_MOVIESAPI}${MovieId}`,
+    "Server 9": `${process.env.NEXT_PUBLIC_111MOVIES}${MovieId}`,
+    "Server 10": `${process.env.NEXT_PUBLIC_RGSHOWS}${MovieId}`,
+    "Server 11": `${process.env.NEXT_PUBLIC_MULTIEMBED}${MovieId}&tmdb=1`,
   };
 
   const TVVideoPlayers = {
-    SK_Server_1: `${process.env.NEXT_PUBLIC_TV_VIDSRC_PRO}${MovieId}/${season}/${episode}`,
-    SK_Server_2: `${process.env.NEXT_PUBLIC_TV_VIDSRC_IN}${MovieId}/${season}/${episode}`,
-    SK_Server_3: `${process.env.NEXT_PUBLIC_TV_VIDSRC_ME}${MovieId}/${season}/${episode}`,
-    SK_Server_4: `${process.env.NEXT_PUBLIC_TV_AUTOEMBED}${MovieId}/${season}/${episode}`,
-    SK_Server_5: `${process.env.NEXT_PUBLIC_TV_MOVIESAPI}${MovieId}/${season}/${episode}`,
-    SK_Server_6: `${process.env.NEXT_PUBLIC_TV_111MOVIES}${MovieId}/${season}/${episode}`,
-    SK_Server_7: `${process.env.NEXT_PUBLIC_TV_VIDLINK}${MovieId}/${season}/${episode}`,
-    SK_Server_8: `${process.env.NEXT_PUBLIC_TV_RGSHOWS}${MovieId}&s=${season}&e=${episode}`
+    "Server 1": `${process.env.NEXT_PUBLIC_TV_VIDSRC_PRO}${MovieId}/${season}/${episode}`,
+    "Server 2": `${process.env.NEXT_PUBLIC_TV_VIDSRC_IN}${MovieId}/${season}/${episode}`,
+    "Server 3": `${process.env.NEXT_PUBLIC_TV_VIDSRC_ME}${MovieId}/${season}/${episode}`,
+    "Server 4": `${process.env.NEXT_PUBLIC_TV_AUTOEMBED}${MovieId}/${season}/${episode}`,
+    "Server 5": `${process.env.NEXT_PUBLIC_TV_MOVIESAPI}${MovieId}/${season}/${episode}`,
+    "Server 6": `${process.env.NEXT_PUBLIC_TV_111MOVIES}${MovieId}/${season}/${episode}`,
+    "Server 7": `${process.env.NEXT_PUBLIC_TV_VIDLINK}${MovieId}/${season}/${episode}`,
+    "Server 8": `${process.env.NEXT_PUBLIC_TV_RGSHOWS}${MovieId}&s=${season}&e=${episode}`,
   };
 
   const MovievideoPlayerEntry = Object.entries(MovieVideoPlayers);
@@ -61,14 +61,19 @@ const Server = () => {
     setDefault();
   }, [MovieInfo]);
 
+  const serverColors = [
+    "#FF5733", "#33FF57", "#3357FF", "#FF33A1", "#FFD700", 
+    "#FF8C00", "#ADFF2F", "#00CED1", "#DC143C", "#8A2BE2", "#20B2AA"
+  ];
+
   return (
     <div className="w-full flex flex-col gap-1">
       <div className="bg-[#323044] w-full h-full px-4 flex items-center gap-8 max-[880px]:py-2 max-[515px]:flex-col max-[515px]:gap-5">
-        <div className="flex items-center">
+        <div className="flex items-center text-white font-bold text-lg">
           <span>
             <svg
               viewBox="0 0 32 32"
-              className="w-5 h-5 mr-1 max-[500px]:w-4"
+              className="w-5 h-5 mr-2 max-[500px]:w-4"
               fill="none"
               aria-hidden="true"
               focusable="false"
@@ -85,16 +90,22 @@ const Server = () => {
           Server
         </div>
         <div className="flex gap-2 flex-wrap max-[515px]:justify-center">
-          {(MovieInfo?.type === "movie" ? MovievideoPlayerEntry : TVVideoPlayerEntry)?.map((item) => (
-            <div
-              key={item[0]}
-              onClick={() => changeServer(item)}
-              style={{ background: watchInfo?.url === item[1] ? "#4a446c" : undefined }}
-              className="px-4 py-[6px] text-[15px] bg-[#413d57] hover:bg-[#4a446c] border border-[#5b5682] rounded-md cursor-pointer"
-            >
-              {item[0]}
-            </div>
-          ))}
+          {(MovieInfo?.type === "movie" ? MovievideoPlayerEntry : TVVideoPlayerEntry)?.map(
+            (item, index) => (
+              <div
+                key={item[0]}
+                onClick={() => changeServer(item)}
+                style={{
+                  background: watchInfo?.url === item[1] ? "#4a446c" : serverColors[index % serverColors.length],
+                  color: "white",
+                  border: "1px solid white",
+                }}
+                className="px-4 py-[6px] text-[15px] rounded-md cursor-pointer hover:opacity-80"
+              >
+                {item[0]}
+              </div>
+            )
+          )}
         </div>
       </div>
     </div>
