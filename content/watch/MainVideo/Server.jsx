@@ -2,35 +2,31 @@ import React, { useEffect } from "react";
 import { useWatchContext } from "@/context/Watch";
 
 const Server = () => {
- const { MovieId, setWatchInfo, watchInfo, MovieInfo, episode, season, imdb_id } = useWatchContext();
+  const { MovieId, setWatchInfo, watchInfo, MovieInfo, episode, season } = useWatchContext();
 
-
-  // Define the video players URLs for movie and TV
+  // Load URLs from environment variables
   const MovieVideoPlayers = {
-    PikaShow: `https://moviereqapi.onrender.com/play/${MovieInfo.imdb_id}?d=pikachu.app&sinku`,
-    sk3: `https://vidlink.pro/movie/${MovieId}`,
-    vidsrcdev: `https://vidsrc.dev/embed/movie/${MovieId}`,
-    vidsrccc: `https://vidsrc.cc/v2/embed/movie/${MovieId}`,
-    vidsrc: `https://vidsrc.in/embed/movie/${MovieId}`,
-    vidsrcpro: `https://vidsrc.pro/embed/movie/${MovieId}`,
-    autoembed: `https://player.autoembed.cc/embed/movie/${MovieId}`,
-    sk1: `https://moviesapi.club/movie/${MovieId}`,
-    sk2: `https://111movies.com/movie/${MovieId}`,
-    sk4: `https://embed.rgshows.me/api/2/movie/?id=${MovieId}`,
-    sk5: `https://multiembed.mov/?video_id=${MovieId}&tmdb=1`,
+    PikaShow: `${process.env.NEXT_PUBLIC_PIKASHOW_URL}${MovieInfo.imdb_id}?d=pikachu.app&sinku`,
+    sk3: `${process.env.NEXT_PUBLIC_VIDLINK_URL}${MovieId}`,
+    vidsrcdev: `${process.env.NEXT_PUBLIC_VIDSRCDEV_URL}${MovieId}`,
+    vidsrc: `${process.env.NEXT_PUBLIC_VIDSRC_URL}${MovieId}`,
+    vidsrcpro: `${process.env.NEXT_PUBLIC_VIDSRC_PRO_URL}${MovieId}`,
+    autoembed: `${process.env.NEXT_PUBLIC_AUTOEMBED_URL}${MovieId}`,
+    sk1: `${process.env.NEXT_PUBLIC_MOVIESAPI_URL}${MovieId}`,
+    sk2: `${process.env.NEXT_PUBLIC_111MOVIES_URL}${MovieId}`,
+    sk4: `${process.env.NEXT_PUBLIC_RGSHOWS_URL}${MovieId}`,
+    sk5: `${process.env.NEXT_PUBLIC_MULTIEMBED_URL}${MovieId}&tmdb=1`,
   };
 
   const TVVideoPlayers = {
-    vidsrcpro: `https://vidsrc.pro/embed/tv/${MovieId}/${season}/${episode}`,
-     PikaShow: `https://moviereqapi.onrender.com/play/s${MovieInfo.imdb_id}?d=pikachu.app&?sinku&noseasons=${season}&noepisodes=${episode}`,
-    "vidsrc.in": `https://vidsrc.in/embed/tv/${MovieId}/${season}/${episode}`,
-    "vidsrc.me": `https://vidsrc.me/v2/embed/tv/${MovieId}/${season}/${episode}`,
-    vidsrc: `https://vidsrc.in/embed/tv/${MovieId}/${season}/${episode}`,
-    autoembed: `https://player.autoembed.cc/embed/tv/${MovieId}/${season}/${episode}`,
-    sk1: `https://moviesapi.club/tv/${MovieId}/${season}/${episode}`,
-    sk2: `https://111movies.com/tv/${MovieId}/${season}/${episode}`,
-    sk3: `https://vidlink.pro/tv/${MovieId}/${season}/${episode}`,
-    sk4: `https://embed.rgshows.me/api/2/tv/?id=${MovieId}&s=${season}&e=${episode}`,
+    vidsrcpro: `${process.env.NEXT_PUBLIC_VIDSRC_PRO_URL}tv/${MovieId}/${season}/${episode}`,
+    PikaShow: `${process.env.NEXT_PUBLIC_PIKASHOW_URL}s${MovieInfo.imdb_id}?d=pikachu.app&sinku&noseasons=${season}&noepisodes=${episode}`,
+    vidsrc: `${process.env.NEXT_PUBLIC_VIDSRC_URL}tv/${MovieId}/${season}/${episode}`,
+    autoembed: `${process.env.NEXT_PUBLIC_AUTOEMBED_URL}tv/${MovieId}/${season}/${episode}`,
+    sk1: `${process.env.NEXT_PUBLIC_MOVIESAPI_URL}tv/${MovieId}/${season}/${episode}`,
+    sk2: `${process.env.NEXT_PUBLIC_111MOVIES_URL}tv/${MovieId}/${season}/${episode}`,
+    sk3: `${process.env.NEXT_PUBLIC_VIDLINK_URL}tv/${MovieId}/${season}/${episode}`,
+    sk4: `${process.env.NEXT_PUBLIC_RGSHOWS_URL}tv/?id=${MovieId}&s=${season}&e=${episode}`,
   };
 
   const MovievideoPlayerEntry = Object.entries(MovieVideoPlayers);
