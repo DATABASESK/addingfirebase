@@ -1,50 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useWatchContext } from "@/context/Watch";
 
 const Server = () => {
   const { MovieId, setWatchInfo, watchInfo, MovieInfo, episode, season } = useWatchContext();
 
-  // Load URLs from environment variables
   const MovieVideoPlayers = {
     Server1: `${process.env.NEXT_PUBLIC_PIKASHOW}${MovieInfo?.imdb_id}?d=pikachu.app&sinku`,
     Server2: `${process.env.NEXT_PUBLIC_VIDLINK}${MovieId}`,
     Server3: `${process.env.NEXT_PUBLIC_VIDSRCDEV}${MovieId}`,
     Server4: `${process.env.NEXT_PUBLIC_VIDSRC_CC}${MovieId}`,
-    Server5: `${process.env.NEXT_PUBLIC_VIDSRC_IN}${MovieId}`,
-    Server6: `${process.env.NEXT_PUBLIC_VIDSRC_PRO}${MovieId}`,
-    Server7: `${process.env.NEXT_PUBLIC_AUTOEMBED}${MovieId}`,
-    Server8: `${process.env.NEXT_PUBLIC_MOVIESAPI}${MovieId}`,
-    Server9: `${process.env.NEXT_PUBLIC_111MOVIES}${MovieId}`,
-    Server10: `${process.env.NEXT_PUBLIC_RGSHOWS}${MovieId}`,
-    Server11: `${process.env.NEXT_PUBLIC_MULTIEMBED}${MovieId}&tmdb=1`,
   };
 
   const TVVideoPlayers = {
     Server1: `${process.env.NEXT_PUBLIC_TV_VIDSRC_PRO}${MovieId}/${season}/${episode}`,
     Server2: `${process.env.NEXT_PUBLIC_TV_VIDSRC_IN}${MovieId}/${season}/${episode}`,
-    Server3: `${process.env.NEXT_PUBLIC_TV_VIDSRC_ME}${MovieId}/${season}/${episode}`,
-    Server4: `${process.env.NEXT_PUBLIC_TV_AUTOEMBED}${MovieId}/${season}/${episode}`,
-    Server5: `${process.env.NEXT_PUBLIC_TV_MOVIESAPI}${MovieId}/${season}/${episode}`,
-    Server6: `${process.env.NEXT_PUBLIC_TV_111MOVIES}${MovieId}/${season}/${episode}`,
-    Server7: `${process.env.NEXT_PUBLIC_TV_VIDLINK}${MovieId}/${season}/${episode}`,
-    Server8: `${process.env.NEXT_PUBLIC_TV_RGSHOWS}${MovieId}&s=${season}&e=${episode}`,
   };
 
   const MovievideoPlayerEntry = Object.entries(MovieVideoPlayers);
   const TVVideoPlayerEntry = Object.entries(TVVideoPlayers);
 
-  const changeServer = async (item, isIframe = true) => {
+  const changeServer = async (item) => {
     setWatchInfo({ loading: true });
-
-    if (isIframe) {
-      if (item) {
-        setWatchInfo({
-          url: item[1],
-          iframe: true,
-          loading: false,
-        });
-      }
-      return;
+    if (item) {
+      setWatchInfo({
+        url: item[1],
+        iframe: true,
+        loading: false,
+      });
     }
   };
 
@@ -70,21 +52,15 @@ const Server = () => {
         ))}
       </div>
 
-      {/* Glowing Gradient "Select a Server" Header */}
-      <div 
-        className="server-header"
-      >
+      {/* Glowing Header */}
+      <div className="server-header">
         Select a Server
       </div>
 
-      {/* Server Selection Buttons */}
+      {/* Server Buttons */}
       <div className="flex flex-wrap gap-3 justify-center">
-        {(MovieInfo?.type === "movie" ? MovievideoPlayerEntry : TVVideoPlayerEntry)?.map((item, index) => (
-          <div
-            key={item[0]}
-            onClick={() => changeServer(item)}
-            className="server-button"
-          >
+        {(MovieInfo?.type === "movie" ? MovievideoPlayerEntry : TVVideoPlayerEntry)?.map((item) => (
+          <div key={item[0]} onClick={() => changeServer(item)} className="server-button">
             {item[0]}
           </div>
         ))}
@@ -102,7 +78,6 @@ const Server = () => {
           font-size: 18px;
           font-weight: bold;
           text-align: center;
-          cursor: pointer;
           display: inline-block;
           margin: auto;
           max-width: 200px;
@@ -130,12 +105,13 @@ const Server = () => {
 
         /* Snowfall Animation */
         .snowfall-container {
-          position: absolute;
+          position: fixed;
           top: 0;
           left: 0;
           width: 100%;
           height: 100%;
           pointer-events: none;
+          overflow: hidden;
           z-index: -1;
         }
 
@@ -144,7 +120,7 @@ const Server = () => {
           top: -10px;
           font-size: 18px;
           color: rgba(255, 255, 255, 0.9);
-          animation: snowfall linear infinite;
+          animation: snowfall linear infinite, sway ease-in-out infinite;
         }
 
         @keyframes snowfall {
@@ -158,12 +134,21 @@ const Server = () => {
           }
         }
 
-        /* Randomized snowflake positions */
+        @keyframes sway {
+          0%, 100% {
+            transform: translateX(0);
+          }
+          50% {
+            transform: translateX(20px);
+          }
+        }
+
+        /* Randomized Snowflake Positions */
         ${Array.from({ length: 50 })
           .map((_, index) => `
             .snowflake:nth-child(${index + 1}) {
               left: ${Math.random() * 100}%;
-              animation-duration: ${Math.random() * 3 + 2}s;
+              animation-duration: ${Math.random() * 3 + 2}s, ${Math.random() * 5 + 3}s;
               animation-delay: ${Math.random() * 2}s;
             }
           `)
