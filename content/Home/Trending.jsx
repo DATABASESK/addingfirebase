@@ -11,7 +11,7 @@ const Trending = ({ data }) => {
 
       <div className="mt-8 grid grid-auto-fit gap-3">
         {results
-          .slice(0, 20)
+          .slice(0, 21)
           .map((item, index) =>
             <Fragment key={index}>
               <TrendingCard info={item} />
