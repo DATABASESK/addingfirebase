@@ -6,30 +6,29 @@ const Server = () => {
 
   // Load URLs from environment variables
  const MovieVideoPlayers = {
-  SK_Server 1: `${process.env.NEXT_PUBLIC_PIKASHOW}${MovieInfo.imdb_id}?d=pikachu.app&sinku`,
-  SK_Server 2: `${process.env.NEXT_PUBLIC_VIDLINK}${MovieId}`,
-  SK_Server 3: `${process.env.NEXT_PUBLIC_VIDSRCDEV}${MovieId}`,
-  SK_Server 4: `${process.env.NEXT_PUBLIC_VIDSRC_CC}${MovieId}`,
-  SK_Server 5: `${process.env.NEXT_PUBLIC_VIDSRC_IN}${MovieId}`,
-  SK_Server 6: `${process.env.NEXT_PUBLIC_VIDSRC_PRO}${MovieId}`,
-  SK_Server 7: `${process.env.NEXT_PUBLIC_AUTOEMBED}${MovieId}`,
-  SK_Server 8: `${process.env.NEXT_PUBLIC_MOVIESAPI}${MovieId}`,
-  SK_Server 9: `${process.env.NEXT_PUBLIC_111MOVIES}${MovieId}`,
-  SK_Server 10: `${process.env.NEXT_PUBLIC_RGSHOWS}${MovieId}`,
-  SK_Server 11: `${process.env.NEXT_PUBLIC_MULTIEMBED}${MovieId}&tmdb=1`,
-};
+    SK_Server_1: `${process.env.NEXT_PUBLIC_PIKASHOW}${MovieInfo?.imdb_id}?d=pikachu.app&sinku`,
+    SK_Server_2: `${process.env.NEXT_PUBLIC_VIDLINK}${MovieId}`,
+    SK_Server_3: `${process.env.NEXT_PUBLIC_VIDSRCDEV}${MovieId}`,
+    SK_Server_4: `${process.env.NEXT_PUBLIC_VIDSRC_CC}${MovieId}`,
+    SK_Server_5: `${process.env.NEXT_PUBLIC_VIDSRC_IN}${MovieId}`,
+    SK_Server_6: `${process.env.NEXT_PUBLIC_VIDSRC_PRO}${MovieId}`,
+    SK_Server_7: `${process.env.NEXT_PUBLIC_AUTOEMBED}${MovieId}`,
+    SK_Server_8: `${process.env.NEXT_PUBLIC_MOVIESAPI}${MovieId}`,
+    SK_Server_9: `${process.env.NEXT_PUBLIC_111MOVIES}${MovieId}`,
+    SK_Server_10: `${process.env.NEXT_PUBLIC_RGSHOWS}${MovieId}`,
+    SK_Server_11: `${process.env.NEXT_PUBLIC_MULTIEMBED}${MovieId}&tmdb=1`
+  };
 
-const TVVideoPlayers = {
-  SK_Server 1: `${process.env.NEXT_PUBLIC_TV_VIDSRC_PRO}${MovieId}/${season}/${episode}`,
-  SK_Server 2: `${process.env.NEXT_PUBLIC_TV_VIDSRC_IN}${MovieId}/${season}/${episode}`,
-  SK_Server 3: `${process.env.NEXT_PUBLIC_TV_VIDSRC_IN}${MovieId}/${season}/${episode}`,
-  SK_Server 4: `${process.env.NEXT_PUBLIC_TV_VIDSRC_ME}${MovieId}/${season}/${episode}`,
-  SK_Server 5: `${process.env.NEXT_PUBLIC_TV_AUTOEMBED}${MovieId}/${season}/${episode}`,
-  SK_Server 6: `${process.env.NEXT_PUBLIC_TV_MOVIESAPI}${MovieId}/${season}/${episode}`,
-  SK_Server 7: `${process.env.NEXT_PUBLIC_TV_111MOVIES}${MovieId}/${season}/${episode}`,
-  SK_Server 8: `${process.env.NEXT_PUBLIC_TV_VIDLINK}${MovieId}/${season}/${episode}`,
-  SK_Server 9: `${process.env.NEXT_PUBLIC_TV_RGSHOWS}${MovieId}&s=${season}&e=${episode}`,
-};
+  const TVVideoPlayers = {
+    SK_Server_1: `${process.env.NEXT_PUBLIC_TV_VIDSRC_PRO}${MovieId}/${season}/${episode}`,
+    SK_Server_2: `${process.env.NEXT_PUBLIC_TV_VIDSRC_IN}${MovieId}/${season}/${episode}`,
+    SK_Server_3: `${process.env.NEXT_PUBLIC_TV_VIDSRC_ME}${MovieId}/${season}/${episode}`,
+    SK_Server_4: `${process.env.NEXT_PUBLIC_TV_AUTOEMBED}${MovieId}/${season}/${episode}`,
+    SK_Server_5: `${process.env.NEXT_PUBLIC_TV_MOVIESAPI}${MovieId}/${season}/${episode}`,
+    SK_Server_6: `${process.env.NEXT_PUBLIC_TV_111MOVIES}${MovieId}/${season}/${episode}`,
+    SK_Server_7: `${process.env.NEXT_PUBLIC_TV_VIDLINK}${MovieId}/${season}/${episode}`,
+    SK_Server_8: `${process.env.NEXT_PUBLIC_TV_RGSHOWS}${MovieId}&s=${season}&e=${episode}`
+  };
 
   const MovievideoPlayerEntry = Object.entries(MovieVideoPlayers);
   const TVVideoPlayerEntry = Object.entries(TVVideoPlayers);
