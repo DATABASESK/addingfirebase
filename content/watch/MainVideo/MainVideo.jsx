@@ -1,7 +1,7 @@
 "use client"
 
 import { useWatchContext } from "@/context/Watch";
-import EpInfo from "./EpInfo";
+
 import Option from "./Option"
 import Server from "./Server";
 
