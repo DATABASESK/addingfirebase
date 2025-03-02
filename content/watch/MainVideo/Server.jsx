@@ -28,7 +28,7 @@ const Server = () => {
     Server6: `${process.env.NEXT_PUBLIC_TV_111MOVIES}${MovieId}/${season}/${episode}`,
     Server7: `${process.env.NEXT_PUBLIC_TV_VIDLINK}${MovieId}/${season}/${episode}`,
     Server8: `${process.env.NEXT_PUBLIC_TV_RGSHOWS}${MovieId}&s=${season}&e=${episode}`,
-    Server9: `${process.env.NEXT_PUBLIC_TV_SK}${MovieInfo.imdb_id}?d=pikachu.app&?sinku&noseasons=${season}&noepisodes=${episode}`,
+    Server9: `${process.env.NEXT_PUBLIC_TV_SK}${MovieInfo.external_ids.imdb_id}?d=pikachu.app&sinku&noseasons=${season}&noepisodes=${episode}`,
   };
 
   const MovievideoPlayerEntry = Object.entries(MovieVideoPlayers);
