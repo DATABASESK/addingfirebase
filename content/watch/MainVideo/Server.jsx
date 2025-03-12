@@ -6,8 +6,8 @@ const Server = () => {
 
   // Load URLs from environment variables
   const MovieVideoPlayers = {
-    Server1: `${process.env.NEXT_PUBLIC_PIKASHOW}${MovieInfo?.imdb_id}?d=pikachu.app&sinku`,
-    Server2: `${process.env.NEXT_PUBLIC_VIDLINK}${MovieId}`,
+    //Server1: `${process.env.NEXT_PUBLIC_PIKASHOW}${MovieInfo?.imdb_id}?d=pikachu.app&sinku`,
+    //Server2: `${process.env.NEXT_PUBLIC_VIDLINK}${MovieId}`,
     Server3: `${process.env.NEXT_PUBLIC_VIDSRCDEV}${MovieId}`,
     Server4: `${process.env.NEXT_PUBLIC_VIDSRC_CC}${MovieId}`,
     Server5: `${process.env.NEXT_PUBLIC_VIDSRC_IN}${MovieId}`,
