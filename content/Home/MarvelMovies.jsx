@@ -1,25 +1,24 @@
 "use client";
 
 import Card from "@/components/Cards/Card/Card";
-import { getMcuMovies } from "@/lib/MoviesFunctions"; // Ensure this function is optimized
-import { useState } from "react";
+import { getMcuMovies } from "@/lib/MoviesFunctions";
+import { useState, useEffect } from "react";
 
 const MarvelMovies = () => {
-  const [page, setPage] = useState(0); 
+  const [page, setPage] = useState(0);
   const [marvelMovies, setMarvelMovies] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [cachedPages, setCachedPages] = useState(new Set()); // Cache fetched pages
+  const [cachedPages, setCachedPages] = useState(new Set());
 
   const fetchMarvelMovies = async (pageNumber) => {
-    if (cachedPages.has(pageNumber)) return; // Skip if data is already fetched
+    if (cachedPages.has(pageNumber)) return;
 
     setLoading(true);
     try {
-      const data = await getMcuMovies(pageNumber); // Fetch MCU movies
-
+      const data = await getMcuMovies(pageNumber);
       if (data.length > 0) {
-        setMarvelMovies((prev) => [...prev, ...data]); 
-        setCachedPages((prev) => new Set(prev).add(pageNumber)); // Cache page
+        setMarvelMovies((prev) => [...prev, ...data]);
+        setCachedPages((prev) => new Set(prev).add(pageNumber));
       }
     } catch (error) {
       console.error("Error fetching movies:", error);
@@ -27,6 +26,13 @@ const MarvelMovies = () => {
       setLoading(false);
     }
   };
+
+  // Fetch first 21 movies when component mounts
+  useEffect(() => {
+    for (let i = 0; i < 3; i++) {
+      fetchMarvelMovies(i);
+    }
+  }, []);
 
   const handleLoadMore = () => {
     const nextPage = page + 1;
@@ -48,7 +54,7 @@ const MarvelMovies = () => {
         )}
 
         {loading &&
-          Array(10) // Reduce skeletons for better performance
+          Array(10)
             .fill(0)
             .map((_, index) => <Card key={index} loading />)}
       </div>
