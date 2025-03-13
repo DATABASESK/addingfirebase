@@ -1,29 +1,37 @@
 "use client";
 
 import Card from "@/components/Cards/Card/Card";
-import { getMcuMovies } from "@/lib/MoviesFunctions"; // Assuming this function is updated with Marvel movies
-import { useEffect, useState } from "react";
+import { getMcuMovies } from "@/lib/MoviesFunctions"; // Ensure this function is optimized
+import { useState } from "react";
 
 const MarvelMovies = () => {
-  const [page, setPage] = useState(0); // Start from 0 so no movies show initially
+  const [page, setPage] = useState(0); 
   const [marvelMovies, setMarvelMovies] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [cachedPages, setCachedPages] = useState(new Set()); // Cache fetched pages
 
   const fetchMarvelMovies = async (pageNumber) => {
+    if (cachedPages.has(pageNumber)) return; // Skip if data is already fetched
+
     setLoading(true);
-    const data = await getMcuMovies(pageNumber); // Fetch MCU movies
+    try {
+      const data = await getMcuMovies(pageNumber); // Fetch MCU movies
 
-    if (data.length > 0) {
-      setMarvelMovies((prev) => [...prev, ...data]); // Append new movies
+      if (data.length > 0) {
+        setMarvelMovies((prev) => [...prev, ...data]); 
+        setCachedPages((prev) => new Set(prev).add(pageNumber)); // Cache page
+      }
+    } catch (error) {
+      console.error("Error fetching movies:", error);
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   const handleLoadMore = () => {
     const nextPage = page + 1;
     setPage(nextPage);
-    fetchMarvelMovies(nextPage); // Fetch data only when clicking "Load More"
+    fetchMarvelMovies(nextPage);
   };
 
   return (
@@ -40,19 +48,19 @@ const MarvelMovies = () => {
         )}
 
         {loading &&
-          Array(20)
+          Array(10) // Reduce skeletons for better performance
             .fill(0)
             .map((_, index) => <Card key={index} loading />)}
       </div>
 
       <div className="mt-8 w-full flex justify-center">
         {!loading && (
-          <div
+          <button
             className="bg-[#22212c] hover:bg-[#2d2c3e] cursor-pointer w-full max-w-96 text-center py-2 rounded-lg text-slate-200"
-            onClick={handleLoadMore} // Load more on click
+            onClick={handleLoadMore}
           >
             Load More
-          </div>
+          </button>
         )}
       </div>
     </div>
