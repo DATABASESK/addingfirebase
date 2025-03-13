@@ -27,7 +27,7 @@ const MarvelMovies = () => {
   return (
     <div className="w-full max-w-[96rem] relative bottom-28 mx-5 mt-16 max-[1270px]:-mt-2">
       <h1 className="text-[#ffffffbd] font-medium text-2xl font-['poppins']">
-        | Marvel Collections (MCU)
+        | (MCU) and (DC) Collections
       </h1>
 
       <div className="mt-8 grid grid-auto-fit gap-3">
