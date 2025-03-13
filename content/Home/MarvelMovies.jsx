@@ -1,3 +1,5 @@
+"use client";
+
 import Card from "@/components/Cards/Card/Card";
 import { getMcuMovies } from "@/lib/MoviesFunctions";
 import { useEffect, useState } from "react";
@@ -11,9 +13,6 @@ const MarvelMovies = () => {
     const fetchMarvelMovies = async () => {
       setLoading(true);
       const data = await getMcuMovies(page);
-      
-      // Log the fetched data for debugging
-      console.log("Fetched movies:", data);
 
       if (data.length > 0) {
         setMarvelMovies((prev) => [...prev, ...data]); // Append new movies
