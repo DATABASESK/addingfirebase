@@ -21,6 +21,7 @@ const Server = () => {
   };
 
   const TVVideoPlayers = {
+    Server0: `https://vidapi.xyz/embed/tv/${MovieId}&s=${season}&e=${episode}`,
     Server1: `${process.env.NEXT_PUBLIC_TV_VIDSRC_PRO}${MovieId}/${season}/${episode}`,
     Server2: `${process.env.NEXT_PUBLIC_TV_VIDSRC_IN}${MovieId}/${season}/${episode}`,
     Server3: `${process.env.NEXT_PUBLIC_TV_VIDSRC_ME}${MovieId}/${season}/${episode}`,
