@@ -7,26 +7,17 @@ import { useWatchContext } from "@/context/Watch";
 
 const Option = () => {
   const { setWatchSetting, watchSetting } = useWatchSettingContext();
-  const { setEpisode, MovieInfo, episode } = useWatchContext(); // Ensure episode state is included
+  const { setEpisode, setSeason, MovieInfo, episode, season, stopVideo } = useWatchContext(); 
 
   const toggleFullscreen = () => {
-    const elem = document.documentElement; // Use the whole document as the fullscreen element
+    const elem = document.documentElement;
     if (!watchSetting.fullscreen) {
-      if (elem.requestFullscreen) {
-        elem.requestFullscreen();
-      } else if (elem.webkitRequestFullscreen) { /* Safari */
-        elem.webkitRequestFullscreen();
-      } else if (elem.msRequestFullscreen) { /* IE11 */
-        elem.msRequestFullscreen();
-      }
+      if (elem.requestFullscreen) elem.requestFullscreen();
+      else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+      else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
     } else {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      } else if (document.webkitExitFullscreen) { /* Safari */
-        document.webkitExitFullscreen();
-      } else if (document.msExitFullscreen) { /* IE11 */
-        document.msExitFullscreen();
-      }
+      if (document.exitFullscreen) document.exitFullscreen();
+      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
     }
     setWatchSetting(prev => ({ ...prev, fullscreen: !prev.fullscreen }));
   };
@@ -34,7 +25,6 @@ const Option = () => {
   return (
     <div className="flex justify-between bg-[#22212c] px-2 py-2 text-slate-200 text-sm max-[880px]:flex-col max-[880px]:gap-5">
       <div className="flex gap-5 max-[880px]:flex-wrap">
-
         <div
           className="flex items-center gap-2 cursor-pointer"
           onClick={() => setWatchSetting(prev => ({ ...prev, isExpanded: !prev.isExpanded }))}
@@ -75,36 +65,47 @@ const Option = () => {
           Fullscreen
           <span className="text-[#e26bbd]">{watchSetting.fullscreen ? "On" : "Off"}</span>
         </div>
-
       </div>
 
       <div className="flex gap-3">
+        {/* Previous Episode */}
         <div
           className="flex items-center gap-2 cursor-pointer"
           onClick={() => {
-            if (MovieInfo?.type === "tv") {
-              setEpisode(prev => {
-                console.log("Previous Episode:", prev);
-                return prev > 1 ? prev - 1 : prev;
-              });
+            if (MovieInfo?.type === "tv" && episode > 1) {
+              stopVideo(); // Stop current video
+              setEpisode(prev => prev - 1);
             }
           }}
         >
           <span><FaBackward /></span> Prev
         </div>
 
+        {/* Next Episode */}
         <div
           className="flex items-center gap-2 cursor-pointer"
           onClick={() => {
             if (MovieInfo?.type === "tv") {
-              setEpisode(prev => {
-                console.log("Next Episode:", prev + 1);
-                return prev + 1;
-              });
+              stopVideo(); // Stop current video
+              setEpisode(prev => prev + 1);
             }
           }}
         >
           Next <span><FaForward /></span>
+        </div>
+
+        {/* Next Season */}
+        <div
+          className="flex items-center gap-2 cursor-pointer"
+          onClick={() => {
+            if (MovieInfo?.type === "tv") {
+              stopVideo(); // Stop current video
+              setSeason(prev => prev + 1);
+              setEpisode(1); // Reset episode to 1 for new season
+            }
+          }}
+        >
+          Next Season <span><FaForward /></span>
         </div>
       </div>
     </div>
