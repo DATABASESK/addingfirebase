@@ -3,6 +3,7 @@
 import { useWatchContext } from "@/context/Watch";
 import Option from "./Option";
 import Server from "./Server";
+
 import { useEffect, useState } from "react";
 
 const VideoPlayer = () => {
