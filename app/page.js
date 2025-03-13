@@ -9,6 +9,7 @@ import Horror from "@/content/Home/Horror";
 import Romantic from "@/content/Home/Romantic";
 import RecentTamil from "@/content/Home/RecentTamil"; 
 import TopNetflixSeries from "@/content/Home/TopNetflixSeries"; // ✅ Import Top Netflix Series
+import FantasyMovies from "@/content/Home/FantasyMovies"; // ✅ Import Fantasy Movies
 
 import { 
   getTrendingMovies, 
@@ -17,7 +18,8 @@ import {
   getHorrorMovies, 
   getRomanticMovies, 
   getRecentTamilMovies,
-  getTopNetflixSeriesGlobal // ✅ Fetch Function for Netflix Series
+  getTopNetflixSeriesGlobal, // ✅ Fetch Function for Netflix Series
+  getFantasyMovies // ✅ Fetch Function for Fantasy Movies
 } from "@/lib/MoviesFunctions";
 
 const Home = async () => {
@@ -28,7 +30,8 @@ const Home = async () => {
     horrorMovies, 
     romanticMovies, 
     recentTamilMovies,
-    topNetflixSeries // ✅ Fetching Netflix Series
+    topNetflixSeries, // ✅ Fetching Netflix Series
+    fantasyMovies // ✅ Fetching Fantasy Movies
   ] = await Promise.all([
     getTrendingMovies(),
     getTopRatedMovies(),
@@ -36,7 +39,8 @@ const Home = async () => {
     getHorrorMovies(),
     getRomanticMovies(),
     getRecentTamilMovies(),
-    getTopNetflixSeriesGlobal() // ✅ Fetching Top Netflix Series
+    getTopNetflixSeriesGlobal(), // ✅ Fetching Top Netflix Series
+    getFantasyMovies() // ✅ Fetching Fantasy Movies
   ]);
 
   return (
@@ -49,6 +53,7 @@ const Home = async () => {
         <TopNetflixSeries data={topNetflixSeries} /> {/* ✅ Added Netflix Series */}
         <RecentTamil data={recentTamilMovies} />
         <WatchHistory />
+        <FantasyMovies data={fantasyMovies} /> {/* ✅ Added Fantasy Movies Below Watch History */}
         <Collection />
         <Popular />
         <TopRated data={top_rateddata} />
