@@ -10,6 +10,7 @@ import Romantic from "@/content/Home/Romantic";
 import RecentTamil from "@/content/Home/RecentTamil"; 
 import TopNetflixSeries from "@/content/Home/TopNetflixSeries"; // ✅ Import Top Netflix Series
 import FantasyMovies from "@/content/Home/FantasyMovies"; // ✅ Import Fantasy Movies
+import MarvelMovies from "@/content/Home/MarvelMovies"; // ✅ Import Marvel Movies
 
 import { 
   getTrendingMovies, 
@@ -19,7 +20,8 @@ import {
   getRomanticMovies, 
   getRecentTamilMovies,
   getTopNetflixSeriesGlobal, // ✅ Fetch Function for Netflix Series
-  getFantasyMovies // ✅ Fetch Function for Fantasy Movies
+  getFantasyMovies, // ✅ Fetch Function for Fantasy Movies
+  getMcuMovies // ✅ Fetch Function for MCU Movies
 } from "@/lib/MoviesFunctions";
 
 const Home = async () => {
@@ -31,7 +33,8 @@ const Home = async () => {
     romanticMovies, 
     recentTamilMovies,
     topNetflixSeries, // ✅ Fetching Netflix Series
-    fantasyMovies // ✅ Fetching Fantasy Movies
+    fantasyMovies, // ✅ Fetching Fantasy Movies
+    marvelMovies // ✅ Fetching Marvel Movies
   ] = await Promise.all([
     getTrendingMovies(),
     getTopRatedMovies(),
@@ -40,7 +43,8 @@ const Home = async () => {
     getRomanticMovies(),
     getRecentTamilMovies(),
     getTopNetflixSeriesGlobal(), // ✅ Fetching Top Netflix Series
-    getFantasyMovies() // ✅ Fetching Fantasy Movies
+    getFantasyMovies(), // ✅ Fetching Fantasy Movies
+    getMcuMovies() // ✅ Fetching Marvel Movies
   ]);
 
   return (
@@ -52,6 +56,10 @@ const Home = async () => {
         <Trending data={trendingdata} />
         <TopNetflixSeries data={topNetflixSeries} /> {/* ✅ Added Netflix Series */}
         <RecentTamil data={recentTamilMovies} />
+        
+        {/* Marvel Movies Section */}
+        <MarvelMovies data={marvelMovies} /> {/* ✅ Added Marvel Movies Below Recent Tamil */}
+
         <WatchHistory />
         <FantasyMovies data={fantasyMovies} /> {/* ✅ Added Fantasy Movies Below Watch History */}
         <Collection />
