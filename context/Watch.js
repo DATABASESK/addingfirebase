@@ -19,35 +19,54 @@ export function WatchAreaContextProvider({ children, MovieInfo, MovieId }) {
 
   const imdb_id = MovieInfo?.external_ids?.imdb_id || ''; // Get IMDb ID
 
-  // Fetch episodes when season changes
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const watchdata = episodes.find(item => item.episode_number === episode);
+        setWatchInfo(prev => ({ ...prev, watchdata }));
+      } catch (error) {
+        handleError(error);
+      }
+    };
+
+    if (MovieInfo?.type !== "tv") {
+      fetchData();
+    }
+  }, [episode]);
+
+  useEffect(() => {
+    if (episodes.length !== 0) {
+      saveWatchProgress(MovieInfo, episodes, episode, season);
+    }
+  }, [episode, episodes]);
+
   useEffect(() => {
     if (!MovieInfo) return; // Early return if MovieInfo is not available
 
     setEpisodeLoading(true); // Start loading state
 
     if (MovieInfo.type !== "tv") {
-      const sampleData = [
-        {
-          episode_number: 1,
-          name: MovieInfo.title,
-          overview: MovieInfo.overview,
-          runtime: 86,
-          season_number: 1,
-          still_path: MovieInfo.backdrop_path,
-        },
-      ];
+      const sampleData = [{
+        episode_number: 1,
+        name: MovieInfo.title,
+        overview: MovieInfo.overview,
+        runtime: 86,
+        season_number: 1,
+        still_path: MovieInfo.backdrop_path,
+      }];
 
       setEpisodes(sampleData);
-      setEpisodeLoading(false);
+      setEpisodeLoading(false); // Stop loading state
       return;
     }
 
     const fetchData = async () => {
       try {
-        const episodeData = await getEpisodes(MovieId, season, imdb_id);
+        const episodeData = await getEpisodes(MovieId, season, imdb_id); // Pass IMDb ID
 
         if (!episodeData) {
           handleNoEpisodeFound();
+          setEpisodeLoading(false); // Stop loading state
           return;
         }
 
@@ -55,35 +74,15 @@ export function WatchAreaContextProvider({ children, MovieInfo, MovieId }) {
       } catch (error) {
         handleError(error);
       } finally {
-        setEpisodeLoading(false);
+        setEpisodeLoading(false); // Stop loading state in either case
       }
     };
 
     fetchData();
-  }, [MovieInfo, MovieId, season, imdb_id]);
-
-  // Update watchInfo when episode changes
-  useEffect(() => {
-    if (episodes.length === 0) return;
-
-    const selectedEpisode = episodes.find((item) => item.episode_number === episode);
-
-    if (!selectedEpisode) {
-      handleNoEpisodeFound();
-      return;
-    }
-
-    setWatchInfo({
-      loading: false,
-      url: selectedEpisode?.url || '',
-      watchdata: selectedEpisode,
-    });
-
-    saveWatchProgress(MovieInfo, episodes, episode, season);
-  }, [episode, episodes]);
+  }, [MovieInfo, MovieId, season, imdb_id]); // Include imdb_id in dependencies
 
   const handleNoEpisodeFound = () => {
-    setWatchInfo({ loading: false, url: '', watchdata: null });
+    setWatchInfo({ loading: false });
     toast(`No episodes found`);
   };
 
@@ -93,34 +92,39 @@ export function WatchAreaContextProvider({ children, MovieInfo, MovieId }) {
     toast('Failed to fetch data');
   };
 
-  const contextValue = useMemo(
-    () => ({
-      episode,
-      watchInfo,
-      setWatchInfo,
-      setEpisode,
-      episodes,
-      MovieInfo,
-      MovieId,
-      season,
-      setSeason,
-      episodeLoading,
-      setEpisodeLoading,
-      imdb_id,
-    }),
-    [
-      episode,
-      watchInfo,
-      episodes,
-      MovieInfo,
-      MovieId,
-      season,
-      episodeLoading,
-      imdb_id,
-    ]
-  );
+  const contextValue = useMemo(() => ({
+    episode,
+    watchInfo,
+    setWatchInfo,
+    setEpisode,
+    episodes,
+    MovieInfo,
+    MovieId,
+    season,
+    setSeason,
+    episodeLoading,
+    setEpisodeLoading,
+    imdb_id // Include IMDb ID in context
+  }), [
+    episode,
+    watchInfo,
+    setWatchInfo,
+    setEpisode,
+    episodes,
+    MovieInfo,
+    MovieId,
+    season,
+    setSeason,
+    episodeLoading,
+    setEpisodeLoading,
+    imdb_id
+  ]);
 
-  return <WatchAreaContext.Provider value={contextValue}>{children}</WatchAreaContext.Provider>;
+  return (
+    <WatchAreaContext.Provider value={contextValue}>
+      {children}
+    </WatchAreaContext.Provider>
+  );
 }
 
 export function useWatchContext() {
