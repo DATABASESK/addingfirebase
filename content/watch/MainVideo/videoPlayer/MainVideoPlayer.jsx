@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import '@vidstack/react/player/styles/default/theme.css';
 import '@vidstack/react/player/styles/default/layouts/video.css';
-import { MediaPlayer, MediaProvider, Track, useMediaRemote } from '@vidstack/react';
+import { MediaPlayer, MediaProvider, Track, useMediaRemote, useMediaStore } from '@vidstack/react';
 import { defaultLayoutIcons, DefaultVideoLayout } from '@vidstack/react/player/layouts/default';
 import { useWatchContext } from '@/context/Watch';
 import { SaveProgress } from '@/utils/saveProgress';
@@ -26,42 +26,28 @@ function throttle(func, limit) {
   };
 }
 
+
 const MainVideoPlayer = ({ videoInfo, movieInfo }) => {
-  const { MovieId, episode, season, setEpisode, setSeason } = useWatchContext();
-  const [duration, setDuration] = useState(0);
-  const [videoUrl, setVideoUrl] = useState('');
+  const { MovieId, episode, season } = useWatchContext()
+  const [duration, setDuration] = useState(0)
 
   const playerRef = useRef(null);
   const remote = useMediaRemote(playerRef);
 
-  // Function to update video source
-  useEffect(() => {
-    if (movieInfo?.type === "tv" && movieInfo?.seasons) {
-      const newEpisodeUrl = movieInfo?.seasons[season - 1]?.episodes?.[episode - 1]?.url || videoInfo?.server;
-      setVideoUrl(newEpisodeUrl);
-    } else {
-      setVideoUrl(videoInfo?.server);
-    }
-  }, [episode, season, movieInfo, videoInfo]);
-
-  // Function to save progress periodically
   const throttledSaveProgress = throttle((data) => {
     SaveProgress(
       MovieId,
-      season || 1,
+      (season || 1),
       episode,
       data?.currentTime,
-      movieInfo?.poster_path 
-        ? `https://image.tmdb.org/t/p/w500${movieInfo?.poster_path}` 
-        : `https://s4.anilist.co/file/anilistcdn/character/large/default.jpg`,
+      movieInfo?.poster_path ? `https://image.tmdb.org/t/p/w500${movieInfo?.poster_path}` : `https://s4.anilist.co/file/anilistcdn/character/large/default.jpg`,
       duration,
-      movieInfo?.title || movieInfo?.name || movieInfo?.original_name || movieInfo?.original_title,
+      (movieInfo?.title || movieInfo?.name || movieInfo?.original_name || movieInfo?.original_title),
       movieInfo?.type
     );
   }, 8000);
 
-  // Resume from last watched timestamp
-  const startFromWhereItWasLeft = () => {
+  const startFromWhereItwasLeft = () => {
     const watch_history = JSON.parse(localStorage?.getItem("watch_history"));
 
     if (
@@ -71,46 +57,44 @@ const MainVideoPlayer = ({ videoInfo, movieInfo }) => {
       watch_history[MovieId].currentTime
     ) {
       const currentTime = parseInt(watch_history[MovieId].currentTime, 10);
-      remote.seek(currentTime);
+
+      remote.seek(currentTime)
     }
-  };
+  }
 
   useEffect(() => {
-    startFromWhereItWasLeft();
-  }, [videoUrl]);
+    startFromWhereItwasLeft()
+  }, [videoInfo])
 
   return (
     <div className="aspect-video">
       <MediaPlayer
         ref={playerRef}
-        title={(movieInfo?.title || movieInfo?.name)?.length > 20 
-          ? `${(movieInfo?.title || movieInfo?.name).slice(0, 20)}...` 
-          : (movieInfo?.title || movieInfo?.name)}
-        viewType="video"
-        logLevel="warn"
-        load="eager"
-        posterLoad="eager"
-        streamType="on-demand"
+        title={(movieInfo?.title || movieInfo?.name)?.length > 20 ? `${(movieInfo?.title || movieInfo?.name).slice(0, 20)}...` : (movieInfo?.title || movieInfo?.name)}
+        viewType='video'
+        logLevel='warn'
+        load='eager'
+        posterLoad='eager'
+        streamType='on-demand'
         crossOrigin
         playsInline
-        src={`https://m3-u8-proxy-iota.vercel.app/m3u8-proxy?url=${encodeURIComponent(videoUrl)}&headers=${encodeURIComponent(`{"referer": "${videoInfo?.referer}"}`)}`}
+        src={`https://m3-u8-proxy-iota.vercel.app/m3u8-proxy?url=${encodeURIComponent(videoInfo?.server)}&headers=${encodeURIComponent(`{"referer": "${videoInfo?.referer}"}`)}`}
         onTimeUpdate={throttledSaveProgress}
-        onDurationChange={(e) => setDuration(e)}
+        onDurationChange={e => setDuration(e)}
       >
         <MediaProvider />
         <DefaultVideoLayout icons={defaultLayoutIcons} />
 
-        {videoInfo?.subtitle?.map((item) => (
-          <Track
-            key={item?.lang}
-            src={item?.src}
-            kind="subtitles"
-            label={item?.lang}
-          />
-        ))}
-      </MediaPlayer>
-    </div>
-  );
-};
+        {videoInfo?.subtitle.map(item => <Track
+          key={item?.lang}
+          src="https://cca.megafiles.store/bc/29/bc29f4ff9607c5e3a948dfe76a38fb09/eng-2.vtt"
+          kind="subtitles"
+          label={item?.lang}
+        />)}
 
-export default MainVideoPlayer;
+      </MediaPlayer>
+    </div >
+  )
+}
+
+export default MainVideoPlayer
