@@ -7,7 +7,7 @@ import { useWatchContext } from "@/context/Watch";
 
 const Option = () => {
   const { setWatchSetting, watchSetting } = useWatchSettingContext();
-  const { setEpisode, setSeason, MovieInfo, episode, season, stopVideo } = useWatchContext(); 
+  const { setEpisode, setSeason, MovieInfo, episode, season, stopVideo } = useWatchContext();
 
   const toggleFullscreen = () => {
     const elem = document.documentElement;
@@ -21,6 +21,10 @@ const Option = () => {
     }
     setWatchSetting(prev => ({ ...prev, fullscreen: !prev.fullscreen }));
   };
+
+  // Get total episodes and total seasons (assuming MovieInfo has them)
+  const totalEpisodes = MovieInfo?.seasons?.[season - 1]?.episode_count || 1; // Default to 1
+  const totalSeasons = MovieInfo?.seasons?.length || 1; // Default to 1
 
   return (
     <div className="flex justify-between bg-[#22212c] px-2 py-2 text-slate-200 text-sm max-[880px]:flex-col max-[880px]:gap-5">
@@ -70,10 +74,10 @@ const Option = () => {
       <div className="flex gap-3">
         {/* Previous Episode */}
         <div
-          className="flex items-center gap-2 cursor-pointer"
+          className={`flex items-center gap-2 cursor-pointer ${episode <= 1 ? "opacity-50 pointer-events-none" : ""}`}
           onClick={() => {
             if (MovieInfo?.type === "tv" && episode > 1) {
-              stopVideo(); // Stop current video
+              stopVideo();
               setEpisode(prev => prev - 1);
             }
           }}
@@ -83,10 +87,10 @@ const Option = () => {
 
         {/* Next Episode */}
         <div
-          className="flex items-center gap-2 cursor-pointer"
+          className={`flex items-center gap-2 cursor-pointer ${episode >= totalEpisodes ? "opacity-50 pointer-events-none" : ""}`}
           onClick={() => {
-            if (MovieInfo?.type === "tv") {
-              stopVideo(); // Stop current video
+            if (MovieInfo?.type === "tv" && episode < totalEpisodes) {
+              stopVideo();
               setEpisode(prev => prev + 1);
             }
           }}
@@ -96,12 +100,12 @@ const Option = () => {
 
         {/* Next Season */}
         <div
-          className="flex items-center gap-2 cursor-pointer"
+          className={`flex items-center gap-2 cursor-pointer ${season >= totalSeasons ? "opacity-50 pointer-events-none" : ""}`}
           onClick={() => {
-            if (MovieInfo?.type === "tv") {
-              stopVideo(); // Stop current video
+            if (MovieInfo?.type === "tv" && season < totalSeasons) {
+              stopVideo();
               setSeason(prev => prev + 1);
-              setEpisode(1); // Reset episode to 1 for new season
+              setEpisode(1); // Reset to first episode of new season
             }
           }}
         >
