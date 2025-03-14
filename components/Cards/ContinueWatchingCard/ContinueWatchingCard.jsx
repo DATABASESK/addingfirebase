@@ -18,7 +18,7 @@ const ContinueWatchingCard = ({ data, hidden }) => {
   return (
     <Link
       className="w-full h-full aspect-video cursor-pointer rounded-xl relative overflow-hidden border-2 border-[#22212c] bg-[#22212c] group"
-      href={`/watch/${data?.id}?media_type=${data?.media_type}&se=${data?.season}&ep=${data?.episode}`}
+      href={/watch/${data?.id}?media_type=${data?.media_type}&se=${data?.season}&ep=${data?.episode}}
     >
       {/* ✅ High-Quality Image Fix */}
       <Image
@@ -39,6 +39,9 @@ const ContinueWatchingCard = ({ data, hidden }) => {
               <div className="text-white text-wrap break-words overflow-hidden text-ellipsis line-clamp-1 font-['poppins'] text-lg cursor-pointer hover:text-slate-200">
                 {data?.title}
               </div>
+              <div className="text-[#ffffff8a] font-['poppins'] text-[14px]">
+                Episode: {data?.episode}
+              </div>
             </div>
 
             {/* Play Button */}
@@ -51,7 +54,7 @@ const ContinueWatchingCard = ({ data, hidden }) => {
           <div className="w-full bg-[#404141] h-1 rounded-md">
             <div
               className="h-full bg-[#dd8dae] rounded-md"
-              style={{ width: `${(data?.episode * 100) / data?.totalepisode || 0}%` }}
+              style={{ width: ${(data?.episode * 100) / data?.totalepisode || 0}% }}
             ></div>
           </div>
         </div>
