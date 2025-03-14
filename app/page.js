@@ -54,6 +54,7 @@ const Home = async () => {
 
       <div className="w-full flex flex-col items-center z-10 relative main-responsive space-y-16 mt-16">
         <Trending data={trendingdata} />
+        <WatchHistory />
         <TopNetflixSeries data={topNetflixSeries} />
         <RecentTamil data={recentTamilMovies} />
         <MarvelMovies data={marvelMovies} />
