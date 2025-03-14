@@ -12,14 +12,18 @@ const nextConfig = {
       'kitsu-production-media.s3.us-west-002.backblazeb2.com',
       'media.themoviedb.org'
     ],
-    unoptimized: true
+    unoptimized: false, // ✅ Enables Next.js image optimization
+    minimumCacheTTL: 60 * 60 * 24 * 7, // ✅ Cache images for 7 days (improves speed)
+    formats: ['image/avif', 'image/webp'], // ✅ Uses modern, high-quality formats
+    deviceSizes: [320, 420, 768, 1024, 1200, 1600], // ✅ Responsive image sizes
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384], // ✅ Optimized for different screen resolutions
   },
   env: {
     TMDB_API_KEY: process.env.TMDB_API_KEY,
     RABBIT_API_KEY: process.env.RABBIT_API_KEY
   },
 
-  // Add custom headers for CSP and X-Frame-Options
+  // ✅ Security Headers
   async headers() {
     return [
       {
