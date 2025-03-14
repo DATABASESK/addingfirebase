@@ -1,7 +1,7 @@
 "use client";
 
 import Card from "@/components/Cards/Card/Card";
-import { getTopNetflixSeriesGlobal } from "@/lib/Tvfunctions";
+import { getTopNetflixSeriesGlobal } from "@/lib/TVfunctions";
 import { useEffect, useState } from "react";
 
 const TopNetflixSeries = () => {
