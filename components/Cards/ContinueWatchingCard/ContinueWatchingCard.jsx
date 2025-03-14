@@ -35,7 +35,7 @@ const ContinueWatchingCard = ({ data, hidden }) => {
                 {data?.title}
               </div>
               <div className="text-[#ffffff8a] font-['poppins'] text-[14px]">
-                Episode: {data?.episode}
+                
               </div>
             </div>
 
