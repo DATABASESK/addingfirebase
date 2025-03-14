@@ -58,7 +58,7 @@ const Home = async () => {
         <TopNetflixSeries data={topNetflixSeries} />
         <RecentTamil data={recentTamilMovies} />
         <MarvelMovies data={marvelMovies} />
-        <WatchHistory />
+       
         <FantasyMovies data={fantasyMovies} />
         <Collection />
         <Popular />
