@@ -3,16 +3,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaPlay, FaTrashAlt } from "react-icons/fa";
 import { removeFromWatchHistory } from "@/utils/ProgressHandler";
+import { useState } from "react";
 
 const ContinueWatchingCard = ({ data, hidden }) => {
-  if (hidden) return <div className="hidden"></div>;
+  const [removed, setRemoved] = useState(false);
+
+  if (hidden || removed) return null; // Hide if removed
 
   const handleRemove = () => {
     removeFromWatchHistory(data?.id);
-    window.location.reload(); // Reload page to reflect changes
+    setRemoved(true); // Update state instead of reloading the page
   };
 
-  // ✅ Upgrade image quality if API provides multiple resolutions
+  // ✅ Upgrade image quality
   const highResThumbnail = data?.thumbnail?.replace("/w300", "/w1280") || data?.thumbnail;
 
   return (
@@ -26,8 +29,8 @@ const ContinueWatchingCard = ({ data, hidden }) => {
         alt={data?.title || "thumbnail"}
         height={284}
         width={388}
-        quality={100}  // Maximum image quality
-        priority       // Faster loading for important images
+        quality={100}
+        priority
         className="object-cover w-full h-full group-hover:h-[106%] duration-200"
       />
 
@@ -38,9 +41,6 @@ const ContinueWatchingCard = ({ data, hidden }) => {
             <div>
               <div className="text-white text-wrap break-words overflow-hidden text-ellipsis line-clamp-1 font-['poppins'] text-lg cursor-pointer hover:text-slate-200">
                 {data?.title}
-              </div>
-              <div className="text-[#ffffff8a] font-['poppins'] text-[14px]">
-                Episode: {data?.episode}
               </div>
             </div>
 
