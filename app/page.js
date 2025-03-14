@@ -13,6 +13,7 @@ import TopNetflixSeries from "@/content/Home/TopNetflixSeries";
 import FantasyMovies from "@/content/Home/FantasyMovies";
 import MarvelMovies from "@/content/Home/MarvelMovies";
 
+// ✅ Fetch functions from different files
 import { 
   getTrendingMovies, 
   getTopRatedMovies, 
@@ -20,10 +21,11 @@ import {
   getHorrorMovies, 
   getRomanticMovies, 
   getRecentTamilMovies,
-  getTopNetflixSeriesGlobal, 
   getFantasyMovies, 
   getMcuMovies 
 } from "@/lib/MoviesFunctions";
+
+import { getTopNetflixSeriesGlobal } from "@/lib/TVfunctions"; // ✅ Corrected import
 
 const Home = async () => {
   const [
@@ -43,13 +45,13 @@ const Home = async () => {
     getHorrorMovies(),
     getRomanticMovies(),
     getRecentTamilMovies(),
-    getTopNetflixSeriesGlobal(),
+    getTopNetflixSeriesGlobal(), // ✅ Now correctly fetched from TVfunctions.js
     getFantasyMovies(),
     getMcuMovies()
   ]);
 
   return (
-    <ScrollRestoration> {/* ✅ Wrap the whole page */}
+    <ScrollRestoration> 
       <Herosection data={trendingdata} />
 
       <div className="w-full flex flex-col items-center z-10 relative main-responsive space-y-16 mt-16">
