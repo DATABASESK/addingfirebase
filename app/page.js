@@ -1,4 +1,4 @@
-import ScrollRestoration from "@/components/ScrollRestoration"; // Import the scroll component
+import ScrollRestoration from "@/components/ScrollRestoration";
 import Collection from "@/content/Home/Collection";
 import Herosection from "@/content/Home/HeroSection/Herosection";
 import Popular from "@/content/Home/Popular";
@@ -49,16 +49,15 @@ const Home = async () => {
   ]);
 
   return (
-    <ScrollRestoration> {/* Wrap with Scroll Restoration */}
+    <ScrollRestoration> {/* ✅ Wrap the whole page */}
       <Herosection data={trendingdata} />
 
       <div className="w-full flex flex-col items-center z-10 relative main-responsive space-y-16 mt-16">
         <Trending data={trendingdata} />
-        <WatchHistory />
         <TopNetflixSeries data={topNetflixSeries} />
         <RecentTamil data={recentTamilMovies} />
         <MarvelMovies data={marvelMovies} />
-       
+        <WatchHistory />
         <FantasyMovies data={fantasyMovies} />
         <Collection />
         <Popular />
