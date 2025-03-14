@@ -3,19 +3,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaPlay, FaTrashAlt } from "react-icons/fa";
 import { removeFromWatchHistory } from "@/utils/ProgressHandler";
-import { useState } from "react";
 
 const ContinueWatchingCard = ({ data, hidden }) => {
-  const [removed, setRemoved] = useState(false);
-
-  if (hidden || removed) return null; // Hide if removed
+  if (hidden) return <div className="hidden"></div>;
 
   const handleRemove = () => {
     removeFromWatchHistory(data?.id);
-    setRemoved(true); // Update state instead of reloading the page
+    window.location.reload(); // Reload page to reflect changes
   };
 
-  // ✅ Upgrade image quality
+  // ✅ Upgrade image quality if API provides multiple resolutions
   const highResThumbnail = data?.thumbnail?.replace("/w300", "/w1280") || data?.thumbnail;
 
   return (
@@ -29,8 +26,8 @@ const ContinueWatchingCard = ({ data, hidden }) => {
         alt={data?.title || "thumbnail"}
         height={284}
         width={388}
-        quality={100}
-        priority
+        quality={100}  // Maximum image quality
+        priority       // Faster loading for important images
         className="object-cover w-full h-full group-hover:h-[106%] duration-200"
       />
 
