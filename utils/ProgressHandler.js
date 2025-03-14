@@ -29,7 +29,8 @@ export const getWatchProgress = (isSlice = true, page = 1, pageSize = 4) => {
     runtime: item.runtime || '',
     media_type: item.media_type || "movie",
     date: item.date || 0,
-    thumbnail: item.thumbnail || "",
+    // ✅ Use high-quality image
+    thumbnail: item.thumbnail.replace("w250_and_h141_bestv2", "w500") || "",
   }));
 
   return data;
@@ -56,7 +57,8 @@ export const saveWatchProgress = (data, episodes, episode) => {
       media_type: data?.type || "movie",
       date: Date.now(),
       movieid: id,
-      thumbnail: `https://image.tmdb.org/t/p/w250_and_h141_bestv2${episodeInfo?.still_path || ""}`,
+      // ✅ Use high-quality thumbnail
+      thumbnail: `https://image.tmdb.org/t/p/w500${episodeInfo?.still_path || ""}`,
     },
   };
 
