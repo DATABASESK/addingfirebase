@@ -32,6 +32,7 @@ const Server = () => {
     Server7: `${process.env.NEXT_PUBLIC_TV_VIDLINK}${MovieId}/${season}/${episode}`,
     Server8: `${process.env.NEXT_PUBLIC_TV_RGSHOWS}${MovieId}&s=${season}&e=${episode}`,
     Server9: `${process.env.NEXT_PUBLIC_TV_SK}${MovieInfo?.imdb_id}?d=pikachu.app&?sinku&noseasons=${season}&noepisodes=${episode}`,
+    serverx:`https://vidsrc.cc/v2/embed/tv/${MovieId}?autoPlay=true`,
   };
 
   const MovievideoPlayerEntry = Object.entries(MovieVideoPlayers);
