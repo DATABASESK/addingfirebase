@@ -19,6 +19,7 @@ const Server = () => {
     Server10: `${process.env.NEXT_PUBLIC_RGSHOWS}${MovieId}`,
     Server11: `${process.env.NEXT_PUBLIC_MULTIEMBED}${MovieId}&tmdb=1`,
     Serverx: `https://ply4.com/movie/?id=${MovieId}`,
+    Serverxx: `https://vidsrc.cc/v2/embed/movie/${MovieId}?autoPlay=true`,
   };
 
   const TVVideoPlayers = {
